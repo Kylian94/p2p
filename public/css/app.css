@@ -10909,3 +10909,11 @@ a.main-color:hover {
   width: 25px;
 }
 
+textarea {
+  border: none;
+}
+
+.main-part {
+  min-height: 90vh;
+}
+

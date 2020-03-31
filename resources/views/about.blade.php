@@ -5,7 +5,7 @@
     <div class="d-flex flex-column align-items-center justify-content-center vh-100 position-relative">
         <img src="{{asset('images/bg-p2p.png')}}" class="position-absolute bg-welcome" alt="" srcset="">
         <img src="{{asset('images/p2p-logo.png')}}" alt="" srcset="">
-        <h1 class="mt-3">Peer 2 pear, c'est quoi ?</h1>
+        <h1 class="mt-3">Peer2pear, c'est quoi ?</h1>
         <div class="d-flex flex-column  align-items-center mt-4">
             <p>Peer 2 Pear est un réseau social permettant de partager,<br>
                 commenter et discuter de ses idées.<br>
