@@ -9,5 +9,6 @@
         <textarea name="post" id="post" placeholder="Partagez vos idées ici..." class="col-12 p-3"></textarea>
         <button type="submit" class="btn btn-rounded px-4 py-2 btn-main-color float-right">Publier</button>
     </form>
+    <hr>
 
 @endsection
