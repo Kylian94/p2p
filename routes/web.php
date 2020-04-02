@@ -34,3 +34,4 @@ Route::get('/profil', 'UserController@profil')->name('profil');
 Route::get('/posts', 'PostController@show')->name('posts');
 
 Route::post('/createPost', 'PostController@store')->name('createPost');
+Route::post('/deletePost', 'PostController@destroy')->name('deletePost');

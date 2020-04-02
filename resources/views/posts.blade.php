@@ -5,12 +5,20 @@
     <h2>Tous mes posts</h2>
     @foreach ($posts as $post)
     <div class="bg-white mb-4 p-3">
-        <div class="d-flex align-items-center">
-            <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-            <div class="d-flex flex-column">
-                <h6 class="font-weight-bold m-0">{{$post->user->name}}</h6>
-                <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                <div class="d-flex flex-column">
+                    <h6 class="font-weight-bold m-0">{{$post->user->name}}</h6>
+                    <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+                </div>
             </div>
+            <form action="/deletePost" method="post">
+                @csrf
+                <input name="id" type="hidden" value="{{$post->id}}">
+                <button type="submit" class="btn btn-secondary btn-rounded" onclick="return confirm('Cette action est irréversible.. Souhaitez vous vraiment supprimer votre post ?')">X</button>
+            </form>
+            
         </div>
         <div class="content  mt-3">
             <p>{{$post->content}}</p>
