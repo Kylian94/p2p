@@ -10970,3 +10970,11 @@ textarea {
   padding: 5px 9px;
 }
 
+.sticky-top {
+  align-self: flex-start;
+}
+
+.mt-10 {
+  padding-top: 3rem;
+}
+

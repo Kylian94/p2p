@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="px-5">
-        <div class="d-flex align-items-center mt-5">
+        <div class="d-flex align-items-center mt-3">
             <a href="{{ route('profil') }}">
                 <img src="{{asset('images/avatar.jpeg')}}" class="main-avatar mr-3" alt="" srcset="">
             </a>

@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand d-flex" href="{{ url('/home') }}">
                    <img src="{{asset('images/p2p-logo.png')}}" class="icon" alt="" srcset=""><p class="m-0">Peer2Pear</p> 
@@ -80,7 +80,7 @@
         <main class="py-4">
             <div class="d-flex flex-wrap">
 
-                <div class="col-3 d-flex flex-column align-items-end pr-5">
+                <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top mt-10">
                     <a href="/home" class="mt-5 text-secondary"><h3>Accueil</h3></a>
                     <a href="#" class="mt-3 text-secondary"><h3>Amis</h3></a>
                     <a href="/posts" class="mt-3 text-secondary"><h3>Posts</h3></a>
@@ -92,7 +92,7 @@
                         @yield('content')
                 </div>
 
-                <div class="col-3">
+                <div class="col-3 sticky-top mt-10">
                     <h3 class="text-secondary mt-5 mb-4">Vous connaissez peut-être...</h3>
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
