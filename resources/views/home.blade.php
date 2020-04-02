@@ -34,9 +34,9 @@
                     <p class="my-0 ml-2">6 likes</p>
                 </div>
                 
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                     <img src="{{asset('images/comment.png')}}" class="icon " alt="" srcset="">
-                    <p class="my-0 ml-2">15 commentaires</p>
+                    <a id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" class="my-0 nav-item nav-link d-flex justify-content-center text-dark">15 commentaires</a>
                 </div>
             </div>
             <!-- END POST -->
@@ -67,7 +67,7 @@
                     </form>
                     <hr class="w-100">
                     <!-- ALL COMMENTS -->
-                    <div class="d-flex flex-column px-5">
+                    <div class="d-flex flex-column px-5 ml-3">
                         <div class="d-flex align-items-center mt-3">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                             <div class="d-flex flex-column">

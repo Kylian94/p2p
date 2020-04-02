@@ -97,11 +97,11 @@
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
                     <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center">
+                        <a href="/user/{{$user->id}}" class="d-flex align-items-center">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                            <h5 class="mr-3">{{$user->name}}</h5>
-                        </div>
-                        <button class="btn btn-main-color btn-rounded">
+                            <h5 class="mr-3 my-0">{{$user->name}}</h5>
+                        </a>
+                        <button class="btn btn-main-color btn-rounded btn-add">
                             <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
                             
                         </button>
