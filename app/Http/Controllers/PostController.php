@@ -55,6 +55,7 @@ class PostController extends Controller
     {
         $user_id = Auth::user()->id;
         $posts = User::find($user_id)->posts;
+        //$posts = $posts::orderBy('created_at', 'DESC');
         $users = User::paginate(5);
         //dd($posts);
         return view('posts', compact('posts', 'users'));
