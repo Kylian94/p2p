@@ -56,7 +56,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <h4 class="dropdown-item">{{Auth::user()->name}}</h4>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('profil') }}">
                                          {{ __('Profil') }}
                                      </a>
                                      <div class="dropdown-divider"></div>

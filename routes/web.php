@@ -21,8 +21,12 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+
+
 Route::get('/user/{id}', 'UserController@user')->name('userProfil');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/profil', 'UserController@profil')->name('profil');
