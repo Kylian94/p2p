@@ -91,6 +91,41 @@
                         </div>
                         <div class="col-3">
                             <h3 class="text-secondary mt-5">Vous connaissez peut-être...</h3>
+                            <!-- SUGGEST USER -->
+                            <div class="d-flex align-items-center justify-content-between mt-5">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                                    <h5 class="mr-3">{{Auth::user()->name}}</h5>
+                                </div>
+                                <button class="btn btn-main-color btn-rounded">
+                                    <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                                    
+                                </button>
+                            </div>
+                            <hr class="w-100">
+                            <!-- END SUGGEST USER-->
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                                    <h5 class="mr-3">{{Auth::user()->name}}</h5>
+                                </div>
+                                <button class="btn btn-main-color btn-rounded">
+                                    <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                                    
+                                </button>
+                            </div>
+                            <hr class="w-100">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                                    <h5 class="mr-3">{{Auth::user()->name}}</h5>
+                                </div>
+                                <button class="btn btn-main-color btn-rounded">
+                                    <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                                    
+                                </button>
+                            </div>
+                            <hr class="w-100">
                         </div>
                     </div>
             
