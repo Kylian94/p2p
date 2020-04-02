@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
                    <img src="{{asset('images/p2p-logo.png')}}" class="icon" alt="" srcset=""><p class="m-0">Peer2Pear</p> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -78,57 +78,41 @@
         </nav>
 
         <main class="py-4">
-                <div class="d-flex flex-wrap">
-                        <div class="col-3 d-flex flex-column align-items-end pr-5">
-                            <a href="#" class="mt-5 text-secondary"><h3>Accueil</h3></a>
-                            <a href="#" class="mt-3 text-secondary"><h3>Amis</h3></a>
-                            <a href="#" class="mt-3 text-secondary"><h3>Posts</h3></a>
-                            <a href="#" class="mt-3 text-secondary"><h3>Likes</h3></a>
-                            <a href="#" class="mt-3 text-secondary"><h3>Comments</h3></a>
+            <div class="d-flex flex-wrap">
+
+                <div class="col-3 d-flex flex-column align-items-end pr-5">
+                    <a href="#" class="mt-5 text-secondary"><h3>Accueil</h3></a>
+                    <a href="#" class="mt-3 text-secondary"><h3>Amis</h3></a>
+                    <a href="#" class="mt-3 text-secondary"><h3>Posts</h3></a>
+                    <a href="#" class="mt-3 text-secondary"><h3>Likes</h3></a>
+                    <a href="#" class="mt-3 text-secondary"><h3>Comments</h3></a>
+                </div>
+
+                <div class="col-6 border-left border-right main-part">
+                        @yield('content')
+                </div>
+
+                <div class="col-3">
+                    <h3 class="text-secondary mt-5 mb-4">Vous connaissez peut-être...</h3>
+                    @foreach($users as $user)
+                    <!-- SUGGEST USER -->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                            <h5 class="mr-3">{{$user->name}}</h5>
                         </div>
-                        <div class="col-6 border-left border-right main-part">
-                                @yield('content')
-                        </div>
-                        <div class="col-3">
-                            <h3 class="text-secondary mt-5">Vous connaissez peut-être...</h3>
-                            <!-- SUGGEST USER -->
-                            <div class="d-flex align-items-center justify-content-between mt-5">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                                    <h5 class="mr-3">{{Auth::user()->name}}</h5>
-                                </div>
-                                <button class="btn btn-main-color btn-rounded">
-                                    <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
-                                    
-                                </button>
-                            </div>
-                            <hr class="w-100">
-                            <!-- END SUGGEST USER-->
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                                    <h5 class="mr-3">{{Auth::user()->name}}</h5>
-                                </div>
-                                <button class="btn btn-main-color btn-rounded">
-                                    <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
-                                    
-                                </button>
-                            </div>
-                            <hr class="w-100">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                                    <h5 class="mr-3">{{Auth::user()->name}}</h5>
-                                </div>
-                                <button class="btn btn-main-color btn-rounded">
-                                    <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
-                                    
-                                </button>
-                            </div>
-                            <hr class="w-100">
-                        </div>
+                        <button class="btn btn-main-color btn-rounded">
+                            <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                            
+                        </button>
                     </div>
-            
+                    <hr class="w-100">
+                    @endforeach
+                    <!-- END SUGGEST USER-->
+                    {{ $users->links() }}
+                </div>
+                
+            </div>
         </main>
     </div>
 </body>

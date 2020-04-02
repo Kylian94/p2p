@@ -64,3 +64,15 @@ textarea {
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
     border:none;
 }
+.pagination {
+margin-top: 2rem;
+   display: flex;
+   justify-content: center;
+}
+.page-item.active .page-link { 
+    background:#57AF4F;
+    border-color: #57AF4F;
+}
+.page-link {
+    color: #57AF4F;
+ }
