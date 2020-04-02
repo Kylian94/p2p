@@ -81,9 +81,9 @@
             <div class="d-flex flex-wrap">
 
                 <div class="col-3 d-flex flex-column align-items-end pr-5">
-                    <a href="#" class="mt-5 text-secondary"><h3>Accueil</h3></a>
+                    <a href="/home" class="mt-5 text-secondary"><h3>Accueil</h3></a>
                     <a href="#" class="mt-3 text-secondary"><h3>Amis</h3></a>
-                    <a href="#" class="mt-3 text-secondary"><h3>Posts</h3></a>
+                    <a href="/posts" class="mt-3 text-secondary"><h3>Posts</h3></a>
                     <a href="#" class="mt-3 text-secondary"><h3>Likes</h3></a>
                     <a href="#" class="mt-3 text-secondary"><h3>Comments</h3></a>
                 </div>
