@@ -41,7 +41,13 @@
                     
                     <div class="d-flex align-items-center">
                         <img src="{{asset('images/comment.png')}}" class="icon " alt="" srcset="">
-                        <a id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" class="my-0 nav-item nav-link d-flex justify-content-center text-dark">15 commentaires</a>
+                        <a id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" class="my-0 nav-item nav-link d-flex justify-content-center text-dark">{{count($post->comments()->get())}} 
+                            @if(count($post->comments()->get()) <= 1 )
+                            commentaire
+                            @else
+                            commentaires
+                            @endif
+                        </a>
                     </div>
                 </div>
             
