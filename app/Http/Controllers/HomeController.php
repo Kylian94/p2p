@@ -34,6 +34,7 @@ class HomeController extends Controller
         $allFriends = Friend::where('user_id', Auth::user()->id)->get();
         $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
         $askedFriends = Friend::where('friend_id', Auth::user()->id)->get();
+
         return view('home', compact('users', 'posts', 'friends', 'allFriends', 'friendsAccepted', 'askedFriends'));
     }
 }

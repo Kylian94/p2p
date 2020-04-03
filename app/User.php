@@ -22,9 +22,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Like');
     }
-    public function friends()
+    function friends()
     {
-        return $this->belongsToMany('App\Friend');
+        return $this->belongsToMany('App\User')
+            // if you want to rely on accepted field, then add this:
+            ->wherePivot('isAccepted', '=', 1);
     }
     /**
      * The attributes that are mass assignable.

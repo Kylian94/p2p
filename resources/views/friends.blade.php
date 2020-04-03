@@ -16,7 +16,7 @@
             
             @foreach($friendsAccepted as $friendAccepted)
                 @php
-                    $userFriendsAccepted = App\User::where('id', $friendAccepted->friend_id)->get();
+                    $userFriendsAccepted = App\User::where('id', $friendAccepted->friend_id)->orWhere('id', $friendAccepted->user_id)->get();
                 @endphp
                 @foreach($userFriendsAccepted as $userFriendAccepted)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
@@ -33,6 +33,8 @@
             @endforeach
             
         </div>
+
+
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 @foreach($askedFriends as $askedFriend)
                 @php
@@ -51,6 +53,8 @@
                 @endforeach
             @endforeach
         </div>
+
+
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 @foreach($allFriends as $allFriend)
                     @php
