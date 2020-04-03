@@ -43,3 +43,10 @@ Route::post('/deleteComment', 'CommentController@destroy')->name('deleteComment'
 
 Route::post('/createLike', 'LikeController@store')->name('createLike');
 Route::post('/deleteLike', 'LikeController@destroy')->name('deleteLike');
+
+
+Route::get('/friends', 'FriendController@show')->name('friends');
+
+Route::post('/createFriend', 'FriendController@create')->name('createFriend');
+Route::post('/acceptFriend', 'FriendController@update')->name('acceptFriend');
+Route::post('/deleteFriend', 'FriendController@destroy')->name('deleteFriend');

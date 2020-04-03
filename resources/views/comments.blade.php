@@ -3,6 +3,7 @@
 @section('content')
 <div class="px-5">
     <h2 class="mt-5">Tous mes commentaires</h2>
+    <hr>
     @if(count($comments) != 0)
     
     @foreach ($comments as $comment)

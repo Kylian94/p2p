@@ -3,6 +3,7 @@
 @section('content')
 <div class="px-5">
     <h2 class="mt-5">Tous mes posts</h2>
+    <hr>
     @if(count($posts) != 0)
     
     @foreach ($posts as $post)

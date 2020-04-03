@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Friend;
 use App\Like;
 use App\Post;
 use App\User;
@@ -29,8 +30,10 @@ class HomeController extends Controller
     {
         $users = User::paginate(5);
         $posts = Post::orderBy('created_at', 'DESC')->get();
-
-
-        return view('home', compact('users', 'posts'));
+        $friends = Friend::where('user_id', Auth::user()->id)->get();
+        $allFriends = Friend::where('user_id', Auth::user()->id)->get();
+        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
+        $askedFriends = Friend::where('friend_id', Auth::user()->id)->get();
+        return view('home', compact('users', 'posts', 'friends', 'allFriends', 'friendsAccepted', 'askedFriends'));
     }
 }

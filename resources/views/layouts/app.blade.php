@@ -82,7 +82,7 @@
 
                 <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top mt-10">
                     <a href="/home" class="mt-5 text-secondary"><h3>Accueil</h3></a>
-                    <a href="#" class="mt-3 text-secondary"><h3>Amis</h3></a>
+                    <a href="/friends" class="mt-3 text-secondary"><h3>Amis</h3></a>
                     <a href="/posts" class="mt-3 text-secondary"><h3>Posts</h3></a>
                     <a href="/comments" class="mt-3 text-secondary"><h3>Comments</h3></a>
                 </div>
@@ -96,14 +96,33 @@
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
                     <div class="d-flex align-items-center justify-content-between">
-                        <a href="/user/{{$user->id}}" class="d-flex align-items-center">
+                        <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                             <h5 class="mr-3 my-0">{{$user->name}}</h5>
                         </a>
-                        <button class="btn btn-main-color btn-rounded btn-add">
-                            <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                        
+                        @php
+                            $userFriends = App\Friend::where('friend_id', $user->id)->get();
                             
-                        </button>
+                        @endphp
+                            
+                       
+                        <form action="/createFriend" method="post" class="mt-3">
+                            @csrf
+                            <input type="hidden" value={{$user->id}} name="friend_id">
+                            
+                                
+                                @if(count($userFriends))
+                                invité
+                                @else
+                                <button type="submit" class="btn btn-main-color btn-rounded btn-add ">
+                                        <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                                    </button>
+                                @endif
+                            
+                            
+                        </form>
+                        
                     </div>
                     <hr class="w-100">
                     @endforeach
