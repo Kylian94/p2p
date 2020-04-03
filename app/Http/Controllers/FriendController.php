@@ -58,7 +58,7 @@ class FriendController extends Controller
 
         $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
 
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
+        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->where('friend_id', Auth::user()->id)->get();
 
         $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
 

@@ -3,5 +3,7 @@
 @section('content')
 <div class="px-5 mt-5">
    <h1>{{$user->name}}</h1> 
+   
+   {{$user}}
 </div>
 @endsection
