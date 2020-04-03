@@ -14,6 +14,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post')->orderBy('created_at', 'DESC');
     }
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->orderBy('created_at', 'DESC');
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -85,7 +85,7 @@
                     <a href="#" class="mt-3 text-secondary"><h3>Amis</h3></a>
                     <a href="/posts" class="mt-3 text-secondary"><h3>Posts</h3></a>
                     <a href="#" class="mt-3 text-secondary"><h3>Likes</h3></a>
-                    <a href="#" class="mt-3 text-secondary"><h3>Comments</h3></a>
+                    <a href="/comments" class="mt-3 text-secondary"><h3>Comments</h3></a>
                 </div>
 
                 <div class="col-6 border-left border-right main-part">

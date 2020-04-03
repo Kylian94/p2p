@@ -3,6 +3,8 @@
 @section('content')
 <div class="px-5">
     <h2>Tous mes posts</h2>
+    @if(count($posts) != 0)
+    
     @foreach ($posts as $post)
     <div class="bg-white mb-4 p-3">
         <div class="d-flex align-items-center justify-content-between">
@@ -85,6 +87,14 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div class="d-flex flex-column align-items-center mt-5 p-5 bg-white rounded">
+        <p>Vous n'avez pas encore posté...</p>
+        <a href="/home" class="btn btn-rounded btn-main-color px-4 py-2">Publier maintenant</a>
+    </div>
+    
+    
+    @endif
 </div>
 
 @endsection

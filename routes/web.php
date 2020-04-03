@@ -35,3 +35,8 @@ Route::get('/posts', 'PostController@show')->name('posts');
 
 Route::post('/createPost', 'PostController@store')->name('createPost');
 Route::post('/deletePost', 'PostController@destroy')->name('deletePost');
+
+Route::get('/comments', 'CommentController@show')->name('comments');
+
+Route::post('/createComment', 'CommentController@store')->name('createComment');
+Route::post('/deleteComment', 'CommentController@destroy')->name('deleteComment');
