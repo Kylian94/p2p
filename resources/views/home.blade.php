@@ -22,7 +22,13 @@
         @foreach ($posts as $post)
         <div class="d-flex flex-column bg-white p-3 rounded mb-4">
             <!-- POST -->
-            
+                @php 
+                $like = App\Like::where([
+                    'user_id' => Auth::user()->id,
+                    'post_id' => $post->id
+                    ])->get();
+                
+                @endphp
                 <div class="d-flex align-items-center mt-4">
                     <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                     <div class="d-flex flex-column">
@@ -35,7 +41,11 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
+                        @if(count($like))
+                        <img src="{{asset('images/heart-fill.png')}}" class="icon" alt="" srcset="">
+                        @else
                         <img src="{{asset('images/heart.png')}}" class="icon" alt="" srcset="">
+                        @endif
                         @if(count($post->likes()->get()) <= 1 )
                         <p class="my-0 ml-2">{{count($post->likes()->get())}} like</p>
                         @else 
@@ -45,7 +55,7 @@
                     
                     <div class="d-flex align-items-center">
                         <img src="{{asset('images/comment.png')}}" class="icon " alt="" srcset="">
-                        <a id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" class="my-0 nav-item nav-link d-flex justify-content-center text-dark">{{count($post->comments()->get())}} 
+                        <a id="nav-profile-tab" data-toggle="tab" href="#nav-profile{{$post->id}}" role="tab" aria-controls="nav-profile" aria-selected="false" class="my-0 nav-item nav-link d-flex justify-content-center text-dark">{{count($post->comments()->get())}} 
                             @if(count($post->comments()->get()) <= 1 )
                             commentaire
                             @else
@@ -58,32 +68,25 @@
             <!-- END POST -->
             <hr class="w-100">
             <!-- NAV LIKE COMMENT-->
-            @php 
-            $like = App\Like::where([
-                'user_id' => Auth::user()->id,
-                'post_id' => $post->id
-                ])->get();
             
-            @endphp
-            @if(count($like))
-            <form  action="/deleteLike" method="post">
-                @csrf
-                <input type="hidden" value={{$post->id}} name="post_id">
-                <button type="submit " class="btn btn-main-color btn-rounded">J'aime plus</button>
-            </form>
-            @else 
-            <form  action="/createLike" method="post">
-                @csrf
-                <input type="hidden" value={{$post->id}} name="post_id">
-                <button type="submit " class="btn btn-main-color btn-rounded">J'aime</button>
-            </form>
-            @endif
             
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <!-- CHANGE A IN FORM TO LIKE -->
                     <div class=" col-6 d-flex justify-content-center">
-                            
+                        @if(count($like))
+                        <form  action="/deleteLike" method="post">
+                            @csrf
+                            <input type="hidden" value={{$post->id}} name="post_id">
+                            <button type="submit " class="btn btn-main-color btn-rounded">J'aime plus</button>
+                        </form>
+                        @else 
+                        <form  action="/createLike" method="post">
+                            @csrf
+                            <input type="hidden" value={{$post->id}} name="post_id">
+                            <button type="submit " class="btn btn-main-color btn-rounded">J'aime</button>
+                        </form>
+                        @endif 
                     </div>
                     
                     <a class=" col-6 nav-item nav-link d-flex justify-content-center" id="nav-profile-tab{{$post->id}}" data-toggle="tab" href="#nav-profile{{$post->id}}" role="tab" aria-controls="nav-profile" aria-selected="false"><img class="icon " src="{{asset('images/comment.png')}}" alt="" srcset="">

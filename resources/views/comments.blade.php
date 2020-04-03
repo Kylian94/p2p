@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="px-5">
-    <h2>Tous mes commentaires</h2>
+    <h2 class="mt-5">Tous mes commentaires</h2>
     @if(count($comments) != 0)
     
     @foreach ($comments as $comment)
@@ -30,7 +30,6 @@
     @else
     <div class="d-flex flex-column align-items-center mt-5 p-5 bg-white rounded">
         <p>Vous n'avez pas encore commenté...</p>
-        <a href="/home" class="btn btn-rounded btn-main-color px-4 py-2">Publier maintenant</a>
     </div>
     
     
