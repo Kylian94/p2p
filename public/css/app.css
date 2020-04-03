@@ -10987,3 +10987,8 @@ textarea {
   z-index: 9999;
 }
 
+.btn-none {
+  border: none;
+  background: none;
+}
+

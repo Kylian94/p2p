@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Like;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +52,12 @@ class LikeController extends Controller
      */
     public function show(Like $like)
     {
-        //
+        $user_id = Auth::user()->id;
+        $likes = User::find($user_id)->likes;
+        //$posts = $posts::orderBy('created_at', 'DESC');
+        $users = User::paginate(5);
+        //dd($posts);
+        return view('likes', compact('likes', 'users'));
     }
 
     /**

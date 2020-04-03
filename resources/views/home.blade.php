@@ -78,18 +78,19 @@
                         <form  action="/deleteLike" method="post">
                             @csrf
                             <input type="hidden" value={{$post->id}} name="post_id">
-                            <button type="submit " class="btn btn-main-color btn-rounded">J'aime plus</button>
+                            <button type="submit " class="btn btn-none text-primary btn-rounded">J'aime plus</button>
                         </form>
                         @else 
                         <form  action="/createLike" method="post">
                             @csrf
                             <input type="hidden" value={{$post->id}} name="post_id">
-                            <button type="submit " class="btn btn-main-color btn-rounded">J'aime</button>
+                            <button type="submit " class="btn btn-none text-primary btn-rounded">J'aime</button>
                         </form>
                         @endif 
                     </div>
                     
-                    <a class=" col-6 nav-item nav-link d-flex justify-content-center" id="nav-profile-tab{{$post->id}}" data-toggle="tab" href="#nav-profile{{$post->id}}" role="tab" aria-controls="nav-profile" aria-selected="false"><img class="icon " src="{{asset('images/comment.png')}}" alt="" srcset="">
+                    <a class=" col-6 nav-item nav-link d-flex justify-content-center" id="nav-profile-tab{{$post->id}}" data-toggle="tab" href="#nav-profile{{$post->id}}" role="tab" aria-controls="nav-profile" aria-selected="false">
+                        {{-- <img class="icon " src="{{asset('images/comment.png')}}" alt="" srcset=""> --}}
                         <p class="my-0 ml-2">Commenter</p>
                     </a>
                 </div>
@@ -114,19 +115,19 @@
                     @endphp
                     
                     @foreach ($comments as $comment)
-                    <div class="d-flex flex-column px-5 ml-3">
-                            <div class="d-flex align-items-center mt-3">
-                                <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                                <div class="d-flex flex-column">
-                                    <h6 class="font-weight-bold m-0">{{$comment->user->name}}</h6>
-                                    <p class="m-0">{{$comment->created_at->diffForHumans()}}</p>
-                                </div>
-                            </div>
-                            <div class="content  mt-3">
-                                <p>{{$comment->content}}</p>
+                    <div class="d-flex flex-column ml-5  bg-light py-3 px-5 mb-2">
+                        <div class="d-flex align-items-center mt-3 ">
+                            <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                            <div class="d-flex flex-column">
+                                <h6 class="font-weight-bold m-0">{{$comment->user->name}}</h6>
+                                <p class="m-0">{{$comment->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
-                        <hr class="w-75 align-right">
+                        <div class="content  mt-3">
+                            <p>{{$comment->content}}</p>
+                        </div>
+                    </div>
+                        
                     @endforeach
                     
                     <!-- END COMMENTS -->
