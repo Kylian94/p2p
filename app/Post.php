@@ -15,6 +15,10 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment')->orderBy('created_at', 'DESC');
     }
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
 
     protected $fillable = [
         'user_id', 'content', 'image',

@@ -40,3 +40,8 @@ Route::get('/comments', 'CommentController@show')->name('comments');
 
 Route::post('/createComment', 'CommentController@store')->name('createComment');
 Route::post('/deleteComment', 'CommentController@destroy')->name('deleteComment');
+
+Route::get('/likes', 'LikeController@show')->name('likes');
+
+Route::post('/createLike', 'LikeController@store')->name('createLike');
+Route::post('/deleteLike', 'LikeController@destroy')->name('deleteLike');

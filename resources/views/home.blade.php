@@ -36,7 +36,11 @@
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
                         <img src="{{asset('images/heart.png')}}" class="icon" alt="" srcset="">
-                        <p class="my-0 ml-2">6 likes</p>
+                        @if(count($post->likes()->get()) <= 1 )
+                        <p class="my-0 ml-2">{{count($post->likes()->get())}} like</p>
+                        @else 
+                        <p class="my-0 ml-2">{{count($post->likes()->get())}} likes</p>
+                        @endif
                     </div>
                     
                     <div class="d-flex align-items-center">
@@ -54,12 +58,34 @@
             <!-- END POST -->
             <hr class="w-100">
             <!-- NAV LIKE COMMENT-->
+            @php 
+            $like = App\Like::where([
+                'user_id' => Auth::user()->id,
+                'post_id' => $post->id
+                ])->get();
+            
+            @endphp
+            @if(count($like))
+            <form  action="/deleteLike" method="post">
+                @csrf
+                <input type="hidden" value={{$post->id}} name="post_id">
+                <button type="submit " class="btn btn-main-color btn-rounded">J'aime plus</button>
+            </form>
+            @else 
+            <form  action="/createLike" method="post">
+                @csrf
+                <input type="hidden" value={{$post->id}} name="post_id">
+                <button type="submit " class="btn btn-main-color btn-rounded">J'aime</button>
+            </form>
+            @endif
+            
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <!-- CHANGE A IN FORM TO LIKE -->
-                <a class=" col-6 nav-item nav-link d-flex justify-content-center" id="nav-home-tab{{$post->id}}" data-toggle="tab" href="#nav-home{{$post->id}}" role="tab" aria-controls="nav-home" aria-selected="true"><img class="icon "src="{{asset('images/heart.png')}}" alt="" srcset="">
-                        <p class="my-0 ml-2">J'aime</p>
-                    </a>
+                    <div class=" col-6 d-flex justify-content-center">
+                            
+                    </div>
+                    
                     <a class=" col-6 nav-item nav-link d-flex justify-content-center" id="nav-profile-tab{{$post->id}}" data-toggle="tab" href="#nav-profile{{$post->id}}" role="tab" aria-controls="nav-profile" aria-selected="false"><img class="icon " src="{{asset('images/comment.png')}}" alt="" srcset="">
                         <p class="my-0 ml-2">Commenter</p>
                     </a>
@@ -67,7 +93,6 @@
             </nav>
             <!-- END NAV -->
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade" id="nav-home{{$post->id}}" role="tabpanel" aria-labelledby="nav-home-tab{{$post->id}}">...</div>
                 <div class="tab-pane fade" id="nav-profile{{$post->id}}" role="tabpanel" aria-labelledby="nav-profile-tab{{$post->id}}">
                     <hr class="w-100">
                     <!-- INPUT COMMENT -->
@@ -96,12 +121,6 @@
                             </div>
                             <div class="content  mt-3">
                                 <p>{{$comment->content}}</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <img src="{{asset('images/heart.png')}}" class="icon" alt="" srcset="">
-                                    <p class="my-0 ml-2">6 likes</p>
-                                </div>
                             </div>
                         </div>
                         <hr class="w-75 align-right">

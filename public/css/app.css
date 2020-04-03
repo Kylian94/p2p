@@ -10972,9 +10972,18 @@ textarea {
 
 .sticky-top {
   align-self: flex-start;
+  z-index: 1000;
 }
 
 .mt-10 {
   padding-top: 3rem;
+}
+
+.dropdown-menu {
+  z-index: 999999;
+}
+
+.navbar {
+  z-index: 9999;
 }
 
