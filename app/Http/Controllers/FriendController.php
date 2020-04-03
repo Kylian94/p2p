@@ -56,7 +56,7 @@ class FriendController extends Controller
         $users = User::paginate(5);
         $friends = Friend::where('user_id', Auth::user()->id)->get();
         $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
+        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
         $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
         return view('friends', compact('users', 'friends', 'allFriends', 'friendsAccepted', 'askedFriends'));
     }
@@ -81,12 +81,12 @@ class FriendController extends Controller
      */
     public function update(Request $request)
     {
-        $friend = Friend::where('friend_id', $request->friend_id)->where('user_id', Auth::user()->id)->update(['isAccepted' => 1]);
+        Friend::where('friend_id', $request->friend_id)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->delete();
         $users = User::paginate(5);
-        $friends = Friend::where('user_id', Auth::user()->id)->get();
-        $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
-        $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
+        $friends = Friend::where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
+        $allFriends = Friend::where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
+        $friendsAccepted = Friend::where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->where('isAccepted', 1)->get();
+        $askedFriends = Friend::where('friend_id', Auth::user()->id)->orWhere('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
         return view('friends', compact('users', 'friends', 'allFriends', 'friendsAccepted', 'askedFriends'));
     }
 
@@ -98,12 +98,12 @@ class FriendController extends Controller
      */
     public function destroy(Request $request)
     {
-        $friend = Friend::where('friend_id', $request->friend_id)->where('user_id', Auth::user()->id)->delete();
+        Friend::where('friend_id', $request->friend_id)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->delete();
         $users = User::paginate(5);
-        $friends = Friend::where('user_id', Auth::user()->id)->get();
-        $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
-        $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
+        $friends = Friend::where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
+        $allFriends = Friend::where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
+        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
+        $askedFriends = Friend::where('friend_id', Auth::user()->id)->orWhere('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
         return view('friends', compact('users', 'friends', 'allFriends', 'friendsAccepted', 'askedFriends'));
     }
 }

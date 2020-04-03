@@ -95,6 +95,7 @@
                     <h3 class="text-secondary mt-5 mb-4">Vous connaissez peut-être...</h3>
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
+                    @if($user->id != Auth::user()->id)
                     <div class="d-flex align-items-center justify-content-between">
                         <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
@@ -102,7 +103,7 @@
                         </a>
                         
                         @php
-                            $userFriends = App\Friend::where('friend_id', $user->id)->get();
+                            $userFriends = App\Friend::where('friend_id', $user->id)->where('user_id', Auth::user()->id)->get();
                             
                         @endphp
                             
@@ -125,6 +126,7 @@
                         
                     </div>
                     <hr class="w-100">
+                    @endif
                     @endforeach
                     <!-- END SUGGEST USER-->
                     {{ $users->links() }}
