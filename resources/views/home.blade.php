@@ -31,13 +31,13 @@
                     ])->get();
                 
                 @endphp
-                <div class="d-flex align-items-center mt-4">
+                <a @if($post->user->id == Auth::user()->id) href="/profil" @else href="/user/{{$post->user->id}}" @endif class="d-flex align-items-center mt-4">
                     <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                     <div class="d-flex flex-column">
-                        <h6 class="font-weight-bold m-0">{{$post->user->name}}</h6>
-                        <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+                        <h6 class="font-weight-bold m-0 text-dark">{{$post->user->name}}</h6>
+                        <p class="m-0 text-dark">{{$post->created_at->diffForHumans()}}</p>
                     </div>
-                </div>
+                </a>
                 <div class="content  mt-3">
                     <p>{{$post->content}}</p>
                 </div>
