@@ -29,12 +29,33 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::paginate(5);
-        $posts = Post::orderBy('created_at', 'DESC')->get();
-        // $friends = Friend::where('user_id', Auth::user()->id)->get();
-        // $allFriends = Friend::where('user_id', Auth::user()->id)->get();
-        // $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
-        // $askedFriends = Friend::where('friend_id', Auth::user()->id)->get();
 
-        return view('home', compact('users', 'posts'));
+        $user = Auth::user();
+        $myFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 1)->get();
+        $FriendsOf = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 1)->get();
+        $posts = [];
+
+        foreach ($myFriends as $myFriend) {
+            $postsOfFriend = Post::where('user_id', $myFriend->user_id)->orderBy('created_at', 'DESC')->get();
+            foreach ($postsOfFriend as $postOfFriend) {
+                array_push($posts, $postOfFriend);
+            }
+        }
+        foreach ($FriendsOf as $FriendOf) {
+            $postsOfFriendsOf = Post::where('user_id', $FriendOf->user_id)->orderBy('created_at', 'DESC')->get();
+
+            foreach ($postsOfFriendsOf as $postOfFriendsOf) {
+                array_push($posts, $postOfFriendsOf);
+            }
+        }
+        $myPosts = Post::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        foreach ($myPosts as $myPost) {
+            array_push($posts, $myPost);
+        }
+
+        $keys = array_column($posts, 'created_at');
+        array_multisort($keys, SORT_DESC, $posts);
+
+        return view('home', compact('users', 'posts', 'user'));
     }
 }

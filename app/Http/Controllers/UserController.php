@@ -24,13 +24,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $users = User::paginate(5);
-        return view('profil', compact('user', 'users'));
+        $posts = Post::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        return view('profil', compact('user', 'users', 'posts'));
     }
     public function user($id)
     {
         $user = User::find($id);
         $users = User::paginate(5);
-        $posts = Post::where('user_id', $user->id)->get();
+        $posts = Post::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
         return view('user', compact('user', 'users', 'posts'));
     }
 }

@@ -19,7 +19,9 @@
         </form>
         <hr>
         <h3>Votre actualité</h3>
+
         @foreach ($posts as $post)
+         
         <div class="d-flex flex-column bg-white p-3 rounded mb-4">
             <!-- POST -->
                 @php 
@@ -135,7 +137,6 @@
             </div>
         </div>
         @endforeach
-        
     </div>
     
 @endsection
