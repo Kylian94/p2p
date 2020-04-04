@@ -12,7 +12,11 @@
             <div class="d-flex align-items-center">
                 <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                 <div class="d-flex flex-column">
-                    <h6 class="font-weight-bold m-0">{{$comment->user->name}}</h6>
+                    <div class="d-flex">
+                            <h6 class="font-weight-bold m-0">{{$comment->user->firstname}}</h6>
+                            <h6 class="font-weight-bold my-0 ml-2">{{$comment->user->lastname}}</h6>
+                    </div>
+                    
                     <p class="m-0">{{$comment->created_at->diffForHumans()}}</p>
                 </div>
             </div>

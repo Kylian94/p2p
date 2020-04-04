@@ -6,7 +6,7 @@
             <a href="{{ route('profil') }}">
                 <img src="{{asset('images/avatar.jpeg')}}" class="main-avatar mr-3" alt="" srcset="">
             </a>
-            <h1 class="">Hello {{Auth::user()->name}},<br>
+            <h1 class="">Hello {{Auth::user()->firstname}},<br>
                 Quoi de beau aujourd'hui ?
             </h1>
         </div>
@@ -34,7 +34,11 @@
                 <a @if($post->user->id == Auth::user()->id) href="/profil" @else href="/user/{{$post->user->id}}" @endif class="d-flex align-items-center mt-4">
                     <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                     <div class="d-flex flex-column">
-                        <h6 class="font-weight-bold m-0 text-dark">{{$post->user->name}}</h6>
+                        <div class="d-flex">
+                                <h6 class="font-weight-bold m-0 text-dark">{{$post->user->firstname}}</h6>
+                                <h6 class="font-weight-bold m-0 text-dark ml-2">{{$post->user->lastname}}</h6>
+                        </div>
+                        
                         <p class="m-0 text-dark">{{$post->created_at->diffForHumans()}}</p>
                     </div>
                 </a>
@@ -121,7 +125,11 @@
                         <div class="d-flex align-items-center mt-3 ">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                             <div class="d-flex flex-column">
-                                <h6 class="font-weight-bold m-0">{{$comment->user->name}}</h6>
+                                <div class="d-flex">
+                                        <h6 class="font-weight-bold m-0">{{$comment->user->firstname}}</h6>
+                                        <h6 class="font-weight-bold my-0 ml-2">{{$comment->user->lastname}}</h6>
+                                </div>
+                                
                                 <p class="m-0">{{$comment->created_at->diffForHumans()}}</p>
                             </div>
                         </div>

@@ -55,7 +55,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <h4 class="dropdown-item">{{Auth::user()->name}}</h4>
+                                    <h4 class="dropdown-item">{{Auth::user()->firstname}}</h4>
                                     <a class="dropdown-item" href="{{ route('profil') }}">
                                          {{ __('Profil') }}
                                      </a>
@@ -113,7 +113,8 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                            <h5 class="mr-3 my-0">{{$user->name}}</h5>
+                            <h5 class="mr-1 my-0">{{$user->firstname}}</h5>
+                            <h5 class="my-0">{{$user->lastname}}</h5>
                         </a>
                         
                         @php

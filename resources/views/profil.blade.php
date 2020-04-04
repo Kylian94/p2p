@@ -6,7 +6,10 @@
    <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
    <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
    
-   <h2 class="pt-3 mt-5">{{$user->name}}</h2>
+   <div class="d-flex pt-3 mt-5">
+         <h2 class="mr-1">{{$user->firstname}}</h2>
+         <h2>{{$user->lastname}}</h2>
+ </div>
    <div class="d-flex">
       <a href="/friends">{{$nbFriends}} Amis</a>
       <p class="mx-3"> | </p>
@@ -18,6 +21,11 @@
    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laborum cupiditate voluptates laboriosam natus, doloribus vitae itaque excepturi. Dolorem, velit nostrum incidunt nam veritatis expedita dolorum qui corrupti id molestias.</p>
    <hr>
    <h4>Mes posts :</h4>
+   @if(count($posts) == 0)
+      <div class="d-flex justify-content-center mt-3 p-4 rounded bg-white">
+         <p class="m-0">Vous n'avez pas encore posté...</p>
+      </div>
+   @endif
    @foreach($posts as $post) 
    <div class="d-flex flex-column bg-white p-3 rounded mb-4">
       <!-- POST -->

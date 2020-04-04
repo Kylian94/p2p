@@ -18,7 +18,8 @@
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
                         <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0">{{$friend->name}}</h5>
+                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     <form action="/deleteFriend" method="post">
                         @csrf
@@ -31,7 +32,8 @@
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
                         <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0">{{$friend->name}}</h5>
+                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     <form action="/deleteFriend" method="post">
                         @csrf
@@ -54,7 +56,8 @@
                     
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
                         <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0 ">{{$friend->name}}</h5>
+                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     
                     <form action="/acceptFriend" method="post">
@@ -76,7 +79,8 @@
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
                         <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0">{{$friend->name}}</h5>
+                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     <form action="/deleteFriend" method="post">
                         @csrf

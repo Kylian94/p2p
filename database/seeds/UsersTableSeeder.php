@@ -16,7 +16,8 @@ class UsersTableSeeder extends Seeder
         for ($i = 0; $i <= 20; $i++) :
             DB::table('users')
                 ->insert([
-                    'name' => $faker->lastName,
+                    'firstname' => $faker->firstName,
+                    'lastname' => $faker->lastName,
                     'email' => $faker->unique()->email,
                     'password' => bcrypt($faker->password)
                 ]);
