@@ -4,7 +4,7 @@
 <div class="px-5 mt-5">
     <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
     <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
-    <div class="d-flex pt-3 mt-5">
+    <div class="d-flex pt-4 mt-5">
             <h2 class="mr-1">{{$user->firstname}}</h2>
             <h2>{{$user->lastname}}</h2>
 
