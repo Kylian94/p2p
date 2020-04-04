@@ -36,7 +36,7 @@ class HomeController extends Controller
         $posts = [];
 
         foreach ($myFriends as $myFriend) {
-            $postsOfFriend = Post::where('user_id', $myFriend->user_id)->orderBy('created_at', 'DESC')->get();
+            $postsOfFriend = Post::where('user_id', $myFriend->friend_id)->orderBy('created_at', 'DESC')->get();
             foreach ($postsOfFriend as $postOfFriend) {
                 array_push($posts, $postOfFriend);
             }
@@ -49,6 +49,7 @@ class HomeController extends Controller
             }
         }
         $myPosts = Post::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+
         foreach ($myPosts as $myPost) {
             array_push($posts, $myPost);
         }
