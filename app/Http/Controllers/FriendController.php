@@ -98,7 +98,7 @@ class FriendController extends Controller
         $users = User::paginate(5);
         $user = Auth::user();
         Friend::where('friend_id', $request->friend_id)->where('user_id', Auth::user()->id)->delete();
-
-        return back();
+        Friend::where('friend_id', Auth::user()->id)->where('user_id', $request->friend_id)->delete();
+        return redirect('/friends');
     }
 }

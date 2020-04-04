@@ -40,7 +40,12 @@
                     </form>
                     
                 </div>
-            @endforeach 
+            @endforeach
+            @if(count($user->friendOfAccepted) == 0)
+            <div class="mt-4 p-3 d-flex justify-content-center bg-white d-flex">
+                <p>Vous n'avez pas encore d'amis</p>
+            </div>
+            @endif
         </div>
 
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -59,6 +64,11 @@
                     </form>
                 </div>
             @endforeach
+            @if(count($user->friendOf) == 0)
+            <div class="mt-4 p-3 justify-content-center bg-white d-flex">
+                <p>Vous n'avez pas reçu de demande d'amis</p>
+            </div>
+            @endif
         </div>
 
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
@@ -76,6 +86,11 @@
                         
                 </div>
             @endforeach
+            @if(count($user->friendsOfMine) == 0)
+            <div class="mt-4 p-3 justify-content-center bg-white d-flex">
+                <p>Vous n'avez pas fait de demande d'amis</p>
+            </div>
+            @endif
         </div>
     </div>
 </div>
