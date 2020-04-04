@@ -13,65 +13,58 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+             
             
-            @foreach($friendsAccepted as $friendAccepted)
-                @php
-                    $userFriendsAccepted = App\User::where('id', $friendAccepted->friend_id)->orWhere('id', $friendAccepted->user_id)->get();
-                @endphp
-                @foreach($userFriendsAccepted as $userFriendAccepted)
+            
+            @foreach($user->friendsAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                    <h5>{{$userFriendAccepted->name}}</h5>
+                    <h5>{{$friend->name}}</h5>
                     <form action="/deleteFriend" method="post">
                         @csrf
-                        <input type="hidden" value="{{$userFriendAccepted->id}}" name="friend_id">
+                        <input type="hidden" value="{{$friend->id}}" name="friend_id">
                         <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
                     </form>
                     
                 </div>
-                
-                @endforeach
             @endforeach
-            
-        </div>
-
-
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                @foreach($askedFriends as $askedFriend)
-                @php
-                    $askFriends = App\User::where('id', $askedFriend->user_id)->get();
-                @endphp
-                @foreach($askFriends as $askFriend)
+            @foreach($user->friendOfAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                    <h5>{{$askFriend->name}}</h5>
-                    <form action="/acceptFriend" method="post">
+                    <h5>{{$friend->name}}</h5>
+                    <form action="/deleteFriend" method="post">
                         @csrf
-                        <input type="hidden" value="{{$askFriend->id}}" name="friend_id">
-                        <button type="submit" class="btn btn-main-color btn-rounded">Accepter</button>
+                        <input type="hidden" value="{{$friend->id}}" name="friend_id">
+                        <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
                     </form>
                     
                 </div>
-                @endforeach
+            @endforeach 
+        </div>
+
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            @foreach($user->friendOf as $friend)
+                <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
+                    <h5>{{$friend->name}}</h5>
+                    <form action="/acceptFriend" method="post">
+                        @csrf
+                        <input type="hidden" value="{{$friend->id}}" name="friend_id">
+                        <button type="submit" class="btn btn-main-color btn-rounded">Accepter</button>
+                    </form>
+                </div>
             @endforeach
         </div>
 
-
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                @foreach($allFriends as $allFriend)
-                    @php
-                        $userFriends = App\User::where('id', $allFriend->friend_id)->get();
-                    @endphp
-                    @foreach($userFriends as $userFriend)
-                    <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                            <h5>{{$userFriend->name}}</h5>
-                            <form action="/deleteFriend" method="post">
-                                @csrf
-                                <input type="hidden" value="{{$userFriend->id}}" name="friend_id">
-                                <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
-                            </form>
-                            
-                        </div>
-                    @endforeach
-                @endforeach
+            @foreach($user->friendsOfMine as $friend)
+                <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
+                    <h5>{{$friend->name}}</h5>
+                    <form action="/deleteFriend" method="post">
+                        @csrf
+                        <input type="hidden" value="{{$friend->id}}" name="friend_id">
+                        <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
+                    </form>
+                        
+                </div>
+            @endforeach
         </div>
     </div>
 </div>

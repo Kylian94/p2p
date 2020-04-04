@@ -22,10 +22,65 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Like');
     }
-    function friends()
+
+    public function friends()
     {
-        return $this->belongsToMany('App\Friend');
-        // if you want to rely on accepted field, then add this:
+        return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')
+            ->wherePivot('isAccepted', '=', 0)
+            ->withPivot('isAccepted');
+    }
+    public function friendsAccepted()
+    {
+        return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')
+            ->wherePivot('isAccepted', '=', 1)
+            ->withPivot('isAccepted');
+    }
+    function friendsOfMine()
+    {
+        return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')
+            ->wherePivot('isAccepted', '=', 0)
+            ->withPivot('isAccepted');
+    }
+    // friendship that I was invited to 
+    function friendOf()
+    {
+        return $this->belongsToMany('App\User', 'friends', 'friend_id', 'user_id')
+            ->wherePivot('isAccepted', '=', 0)
+            ->withPivot('isAccepted');
+    }
+    function friendsOfMineAccepted()
+    {
+        return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id')
+            ->wherePivot('isAccepted', '=', 1)
+            ->withPivot('isAccepted');
+    }
+    // friendship that I was invited to 
+    function friendOfAccepted()
+    {
+        return $this->belongsToMany('App\User', 'friends', 'friend_id', 'user_id')
+            ->wherePivot('isAccepted', '=', 1)
+            ->withPivot('isAccepted');
+    }
+    // accessor allowing you call $user->friends
+    public function getFriendsAttribute()
+    {
+        if (!array_key_exists('friends', $this->relations)) $this->loadFriends();
+        return $this->getRelation('friends');
+    }
+    protected function loadFriends()
+    {
+        if (!array_key_exists('friends', $this->relations)) {
+            $friends = $this->mergeFriends();
+            $this->setRelation('friends', $friends);
+        }
+    }
+    protected function mergeFriends()
+    {
+        return $this->friendsOfMine->merge($this->friendOf);
+    }
+    protected function mergeFriendsAccepted()
+    {
+        return $this->friendsOfMineAccepted->merge($this->friendOfAccepted);
     }
     /**
      * The attributes that are mass assignable.

@@ -30,11 +30,11 @@ class HomeController extends Controller
     {
         $users = User::paginate(5);
         $posts = Post::orderBy('created_at', 'DESC')->get();
-        $friends = Friend::where('user_id', Auth::user()->id)->get();
-        $allFriends = Friend::where('user_id', Auth::user()->id)->get();
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
-        $askedFriends = Friend::where('friend_id', Auth::user()->id)->get();
+        // $friends = Friend::where('user_id', Auth::user()->id)->get();
+        // $allFriends = Friend::where('user_id', Auth::user()->id)->get();
+        // $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->get();
+        // $askedFriends = Friend::where('friend_id', Auth::user()->id)->get();
 
-        return view('home', compact('users', 'posts', 'friends', 'allFriends', 'friendsAccepted', 'askedFriends'));
+        return view('home', compact('users', 'posts'));
     }
 }

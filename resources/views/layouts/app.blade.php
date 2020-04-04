@@ -102,10 +102,10 @@
                             <h5 class="mr-3 my-0">{{$user->name}}</h5>
                         </a>
                         
-                        @php
+                        {{-- @php
                             $userFriends = App\Friend::where('friend_id', $user->id)->where('user_id', Auth::user()->id)->get();
                             
-                        @endphp
+                        @endphp --}}
                             
                        
                         <form action="/createFriend" method="post" class="mt-3">
@@ -113,13 +113,13 @@
                             <input type="hidden" value={{$user->id}} name="friend_id">
                             
                                 
-                                @if(count($userFriends))
+                                {{-- @if(count($userFriends))
                                 invité
-                                @else
+                                @else --}}
                                 <button type="submit" class="btn btn-main-color btn-rounded btn-add ">
                                         <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
                                     </button>
-                                @endif
+                                {{-- @endif --}}
                             
                             
                         </form>

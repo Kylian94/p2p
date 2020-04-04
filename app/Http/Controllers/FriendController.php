@@ -56,13 +56,11 @@ class FriendController extends Controller
     {
         $users = User::paginate(5);
 
-        $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
+        $user = Auth::user();
 
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->where('friend_id', Auth::user()->id)->get();
 
-        $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
 
-        return view('friends', compact('users', 'allFriends', 'friendsAccepted', 'askedFriends'));
+        return view('friends', compact('users', 'user'));
     }
 
     /**
@@ -86,16 +84,11 @@ class FriendController extends Controller
     public function update(Request $request)
     {
         $users = User::paginate(5);
-
+        $user = Auth::user();
         Friend::where('friend_id', Auth::user()->id)->where('user_id', $request->friend_id)->update(['isAccepted' => 1]);
 
-        $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
 
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
-
-        $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
-
-        return view('friends', compact('users', 'allFriends', 'friendsAccepted', 'askedFriends'));
+        return back();
     }
 
     /**
@@ -107,15 +100,9 @@ class FriendController extends Controller
     public function destroy(Request $request)
     {
         $users = User::paginate(5);
-
+        $user = Auth::user();
         Friend::where('friend_id', $request->friend_id)->where('user_id', Auth::user()->id)->delete();
 
-        $allFriends = Friend::where('user_id', Auth::user()->id)->where('isAccepted', 0)->get();
-
-        $friendsAccepted = Friend::where('isAccepted', 1)->where('user_id', Auth::user()->id)->orWhere('friend_id', Auth::user()->id)->get();
-
-        $askedFriends = Friend::where('friend_id', Auth::user()->id)->where('isAccepted', 0)->get();
-
-        return view('friends', compact('users', 'allFriends', 'friendsAccepted', 'askedFriends'));
+        return back();
     }
 }
