@@ -23,7 +23,7 @@
                     <form action="/deleteFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
-                        <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
+                        <button type="submit" class="btn btn-danger btn-rounded">Supprimer</button>
                     </form>  
                 </div>
             @endforeach
@@ -36,7 +36,7 @@
                     <form action="/deleteFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
-                        <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
+                        <button type="submit" class="btn btn-danger btn-rounded">Supprimer</button>
                     </form>
                     
                 </div>
@@ -81,7 +81,7 @@
                     <form action="/deleteFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
-                        <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
+                        <button type="submit" class="btn btn-danger btn-rounded">Supprimer</button>
                     </form>
                         
                 </div>

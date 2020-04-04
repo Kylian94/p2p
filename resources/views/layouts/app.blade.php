@@ -82,9 +82,10 @@
 
                 <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top mt-10">
                     <a href="/home" class="mt-5 text-secondary"><h3>Accueil</h3></a>
-                    <a href="/friends" class="mt-3 text-secondary"><h3>Amis</h3></a>
-                    <a href="/posts" class="mt-3 text-secondary"><h3>Posts</h3></a>
-                    <a href="/comments" class="mt-3 text-secondary"><h3>Comments</h3></a>
+                    <a href="/profil" class="mt-3 text-secondary"><h3>Mon profil</h3></a>
+                    <a href="/friends" class="mt-3 text-secondary"><h3>Mes amis</h3></a>
+                    <a href="/posts" class="mt-3 text-secondary"><h3>Mes posts</h3></a>
+                    <a href="/comments" class="mt-3 text-secondary"><h3>Mes commentaires</h3></a>
                 </div>
 
                 <div class="col-6 border-left border-right main-part">

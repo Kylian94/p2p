@@ -1,8 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="px-5 mt-5">
-   <h1>{{$user->name}}</h1>
+<div class="px-5 ">
+   <a class=" float-right mb-3 btn btn-main-color btn-rounded" href="/editProfil">Modifier mon profil</a>
+   <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
+   <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
+   
+   <h2 class="pt-3 mt-5">{{$user->name}}</h2>
+   <div class="d-flex">
+      <a href="/friends">{{$nbFriends}} Amis</a>
+      <p class="mx-3"> | </p>
+      <p>{{count($comments)}} Commentaires</p>
+      <p class="mx-3"> | </p>
+      <p>{{count($likes)}} J'aime</p>
+   </div>
+   <h4>Ma description :</h4>
+   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laborum cupiditate voluptates laboriosam natus, doloribus vitae itaque excepturi. Dolorem, velit nostrum incidunt nam veritatis expedita dolorum qui corrupti id molestias.</p>
+   <hr>
+   <h4>Mes posts :</h4>
    @foreach($posts as $post) 
    <div class="d-flex flex-column bg-white p-3 rounded mb-4">
       <!-- POST -->
@@ -13,12 +28,21 @@
                ])->get();
             
             @endphp
-            <div class="d-flex align-items-center mt-4">
-               <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-               <div class="d-flex flex-column">
-                  <h6 class="font-weight-bold m-0">{{$post->user->name}}</h6>
-                  <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+            <div class="d-flex align-items-center  justify-content-between mt-4">
+
+               <div class="d-flex">
+                  <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                  <div class="d-flex flex-column">
+                     <h6 class="font-weight-bold m-0">{{$post->user->name}}</h6>
+                     <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+                  </div>
                </div>
+               
+               <form action="/deletePost" method="post">
+                  @csrf
+                  <input name="id" type="hidden" value="{{$post->id}}">
+                  <button type="submit" class="btn btn-secondary btn-rounded" onclick="return confirm('Cette action est irréversible.. Souhaitez vous vraiment supprimer votre post ?')">X</button>
+              </form>
             </div>
             <div class="content  mt-3">
                <p>{{$post->content}}</p>

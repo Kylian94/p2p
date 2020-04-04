@@ -2,7 +2,18 @@
 
 @section('content')
 <div class="px-5 mt-5">
-   <h1>{{$user->name}}</h1> 
+    <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
+    <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
+    <h2 class="pt-3 mt-5">{{$user->name}}</h2>
+    <div class="d-flex">
+        <p>{{$nbFriends}} Amis</p>
+        <p class="mx-3"> | </p>
+        <p>{{count($comments)}} Commentaires</p>
+        <p class="mx-3"> | </p>
+        <p>{{count($likes)}} J'aime</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laborum cupiditate voluptates laboriosam natus, doloribus vitae itaque excepturi. Dolorem, velit nostrum incidunt nam veritatis expedita dolorum qui corrupti id molestias.</p>
+    <hr>
    @php
       $userFriend = App\Friend::where('friend_id', $user->id)
       ->where('user_id', Auth::user()->id)
@@ -12,12 +23,38 @@
       ->where('user_id', $user->id)
       ->where('isAccepted', 1)
       ->get();
-
+      $userFriendPending = App\Friend::where('friend_id', $user->id)
+      ->where('user_id', Auth::user()->id)
+      ->where('isAccepted', 0)
+      ->get();
+      $userFriendOfPending = App\Friend::where('friend_id', Auth::user()->id )
+      ->where('user_id', $user->id)
+      ->where('isAccepted', 0)
+      ->get();
       
    @endphp
    
    @if(count($userFriend) == 0 && count($userFriendOf) == 0)
-   <p>You are not friend</p>
+   
+   <div class="d-flex justify-content-between align-items-center">
+    <p class="mt-3">Vous n'êtes pas encore amis...</p>                                     
+    <form action="/createFriend" method="post" class="mt-3">
+        @csrf
+        
+        <input type="hidden" value={{$user->id}} name="friend_id">
+            @if(count($userFriendPending) OR count($userFriendOfPending))
+                
+                <button type="button" class="btn btn-secondary btn-rounded btn-add disabled px-4 py-2">
+                        En attente d'acceptation
+                </button>
+            @else 
+            
+            <button type="submit" class="btn btn-main-color btn-rounded btn-add px-4 py-2">
+                    Ajouter comme ami 
+                </button>
+            @endif  
+    </form>
+   </div>
    @else 
    <p>You are friend</p>
    @foreach($posts as $post)
