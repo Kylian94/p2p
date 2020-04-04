@@ -113,7 +113,7 @@
                         <div class="d-flex align-items-center mt-3">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
                             <div class="d-flex flex-column">
-                                    <a href="/user/{{$comment->user->id}}" class="d-flex">
+                                    <a @if($comment->user->id == Auth::user()->id) href="/profil" @else href="/user/{{$comment->user->id}}" @endif class="d-flex">
                                             <h6 class="font-weight-bold m-0">{{$comment->user->firstname}}</h6>
                                             <h6 class="font-weight-bold my-0 ml-1">{{$comment->user->lastname}}</h6>
                                     </a>
