@@ -31,8 +31,7 @@ class FriendController extends Controller
         $friend->friend_id = $request->friend_id;
         $friend->save();
 
-
-        return redirect('/home');
+        return back();
     }
 
     /**
@@ -57,8 +56,6 @@ class FriendController extends Controller
         $users = User::paginate(5);
 
         $user = Auth::user();
-
-
 
         return view('friends', compact('users', 'user'));
     }
@@ -86,7 +83,6 @@ class FriendController extends Controller
         $users = User::paginate(5);
         $user = Auth::user();
         Friend::where('friend_id', Auth::user()->id)->where('user_id', $request->friend_id)->update(['isAccepted' => 1]);
-
 
         return back();
     }

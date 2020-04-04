@@ -14,8 +14,6 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
              
-            
-            
             @foreach($user->friendsAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <h5>{{$friend->name}}</h5>
@@ -23,8 +21,7 @@
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
                         <button type="submit" class="btn btn-main-color btn-rounded">Supprimer</button>
-                    </form>
-                    
+                    </form>  
                 </div>
             @endforeach
             @foreach($user->friendOfAccepted as $friend)
