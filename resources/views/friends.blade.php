@@ -41,7 +41,7 @@
                     
                 </div>
             @endforeach
-            @if(count($user->friendOfAccepted) == 0)
+            @if(count($user->friendOfAccepted) == 0 && count($user->friendsAccepted) == 0)
             <div class="mt-4 p-3 d-flex justify-content-center bg-white d-flex">
                 <p>Vous n'avez pas encore d'amis</p>
             </div>
