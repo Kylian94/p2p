@@ -42,7 +42,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->save();
 
-        return redirect('/home');
+        return back();
     }
 
     /**
@@ -93,6 +93,6 @@ class PostController extends Controller
     public function destroy(Request $request)
     {
         Post::where('id', $request->id)->delete();
-        return redirect('/posts');
+        return back();
     }
 }

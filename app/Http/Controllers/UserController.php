@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $users = User::paginate(5);
-        return view('user', compact('user', 'users'));
+        $posts = Post::where('user_id', $user->id)->get();
+        return view('user', compact('user', 'users', 'posts'));
     }
 }

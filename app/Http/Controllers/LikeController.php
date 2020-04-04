@@ -41,7 +41,7 @@ class LikeController extends Controller
         $like->post_id = $request->post_id;
         $like->save();
 
-        return redirect('/home');
+        return back();
     }
 
     /**
@@ -96,6 +96,6 @@ class LikeController extends Controller
             'user_id' => Auth::user()->id,
             'post_id' => $request->post_id
         ])->delete();
-        return redirect('/home');
+        return back();
     }
 }

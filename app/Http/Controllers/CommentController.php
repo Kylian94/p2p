@@ -43,7 +43,7 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->save();
 
-        return redirect('/home');
+        return back();
     }
 
     /**
@@ -95,6 +95,6 @@ class CommentController extends Controller
     public function destroy(Request $request)
     {
         Comment::where('id', $request->id)->delete();
-        return redirect('/comments');
+        return back();
     }
 }

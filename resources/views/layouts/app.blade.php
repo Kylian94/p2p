@@ -95,6 +95,19 @@
                     <h3 class="text-secondary mt-5 mb-4">Vous connaissez peut-être...</h3>
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
+                    @php 
+                        $userAccepted = App\Friend::where('friend_id', $user->id)
+                                            ->where('user_id', Auth::user()->id)
+                                            ->where('isAccepted', 1)
+                                            ->get();
+
+                        $friendAccepted = App\Friend::where('friend_id', Auth::user()->id)
+                                            ->where('user_id', $user->id)
+                                            ->where('isAccepted', 1)
+                                            ->get();
+                    @endphp
+                    @if(count($userAccepted) || count($friendAccepted))
+                    @else
                     @if($user->id != Auth::user()->id)
                     <div class="d-flex align-items-center justify-content-between">
                         <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
@@ -102,30 +115,28 @@
                             <h5 class="mr-3 my-0">{{$user->name}}</h5>
                         </a>
                         
-                        {{-- @php
+                        @php
                             $userFriends = App\Friend::where('friend_id', $user->id)->where('user_id', Auth::user()->id)->get();
-                            
-                        @endphp --}}
+                        @endphp
                             
                        
                         <form action="/createFriend" method="post" class="mt-3">
                             @csrf
                             <input type="hidden" value={{$user->id}} name="friend_id">
-                            
-                                
-                                {{-- @if(count($userFriends))
-                                invité
-                                @else --}}
+                                 @if(count($userFriends))
+                                 <button type="button" class="btn btn-secondary btn-rounded btn-add disabled ">
+                                        <img src="{{asset('images/wait.png')}}" alt="" srcset="" class="icon-little"> 
+                                    </button>
+                                @else 
                                 <button type="submit" class="btn btn-main-color btn-rounded btn-add ">
                                         <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
                                     </button>
-                                {{-- @endif --}}
-                            
-                            
+                                @endif  
                         </form>
                         
                     </div>
                     <hr class="w-100">
+                    @endif
                     @endif
                     @endforeach
                     <!-- END SUGGEST USER-->

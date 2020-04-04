@@ -16,7 +16,10 @@
              
             @foreach($user->friendsAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                    <h5>{{$friend->name}}</h5>
+                    <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
+                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
+                        <h5 class="ml-3 my-0">{{$friend->name}}</h5>
+                    </a>
                     <form action="/deleteFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
@@ -26,7 +29,10 @@
             @endforeach
             @foreach($user->friendOfAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                    <h5>{{$friend->name}}</h5>
+                    <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
+                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
+                        <h5 class="ml-3 my-0">{{$friend->name}}</h5>
+                    </a>
                     <form action="/deleteFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
@@ -40,7 +46,12 @@
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             @foreach($user->friendOf as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                    <h5>{{$friend->name}}</h5>
+                    
+                    <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
+                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
+                        <h5 class="ml-3 my-0 ">{{$friend->name}}</h5>
+                    </a>
+                    
                     <form action="/acceptFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
@@ -53,7 +64,10 @@
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
             @foreach($user->friendsOfMine as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
-                    <h5>{{$friend->name}}</h5>
+                    <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
+                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
+                        <h5 class="ml-3 my-0">{{$friend->name}}</h5>
+                    </a>
                     <form action="/deleteFriend" method="post">
                         @csrf
                         <input type="hidden" value="{{$friend->id}}" name="friend_id">
