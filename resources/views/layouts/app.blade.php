@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Peer2Pear</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,79 +21,34 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
-            <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
-                   <img src="{{asset('images/p2p-logo.png')}}" class="icon" alt="" srcset=""><p class="m-0">Peer2Pear</p> 
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Mon compte <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <h4 class="dropdown-item">{{Auth::user()->firstname}}</h4>
-                                    <a class="dropdown-item" href="{{ route('profil') }}">
-                                         {{ __('Profil') }}
-                                     </a>
-                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Déconnexion') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
         <main class="py-4">
             <div class="d-flex flex-wrap">
 
-                <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top mt-10">
+                <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top mt-4">
+                    <div class=" d-flex" href="{{ url('/home') }}">
+                        <img src="{{asset('images/p2p-logo.png')}}" class="icon" alt="" srcset=""><h2 class="m-0">Peer2Pear</h2> 
+                    </div>
                     <a href="/home" class="mt-5 text-secondary"><h3>Accueil</h3></a>
                     <a href="/profil" class="mt-3 text-secondary"><h3>Mon profil</h3></a>
                     <a href="/friends" class="mt-3 text-secondary"><h3>Mes amis</h3></a>
                     <a href="/posts" class="mt-3 text-secondary"><h3>Mes posts</h3></a>
                     <a href="/comments" class="mt-3 text-secondary"><h3>Mes commentaires</h3></a>
+                    <a class="btn btn-rounded px-4 py-2 btn-secondary mt-5" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Déconnexion') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
 
-                <div class="col-6 border-left border-right main-part">
+                <div class="col-6 border-left border-right main-part pt-4">
                         @yield('content')
                 </div>
 
-                <div class="col-3 sticky-top mt-10">
-                    <h3 class="text-secondary mt-5 mb-4">Vous connaissez peut-être...</h3>
+                <div class="col-3 sticky-top mt-4">
+                    <h3 class="text-secondary  mb-4">Vous connaissez peut-être...</h3>
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
                     @php 
@@ -113,8 +68,8 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                            <h5 class="mr-1 my-0">{{$user->firstname}}</h5>
-                            <h5 class="my-0">{{$user->lastname}}</h5>
+                            <h5 class="mr-1 my-0 text-dark">{{$user->firstname}}</h5>
+                            <h5 class="my-0 text-dark">{{$user->lastname}}</h5>
                         </a>
                         
                         @php
