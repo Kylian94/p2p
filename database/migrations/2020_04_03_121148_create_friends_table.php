@@ -13,7 +13,7 @@ class CreateFriendsTable extends Migration
      */
     public function up()
     {
-        Schema::create('friend_user', function (Blueprint $table) {
+        Schema::create('friends', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->integer('friend_id');
@@ -29,6 +29,6 @@ class CreateFriendsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('friend_user');
+        Schema::dropIfExists('friends');
     }
 }
