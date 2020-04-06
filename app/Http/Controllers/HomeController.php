@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request)) {
+        if ($request->search) {
 
             $users = User::paginate(5);
             $usersFounded = User::where('firstname', 'LIKE',  '%' . $request->search . '%')->orWhere('lastname', 'LIKE', '%' . $request->search . '%')->get();
