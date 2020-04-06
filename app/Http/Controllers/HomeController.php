@@ -26,8 +26,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (isset($request)) {
+
+            $users = User::paginate(5);
+            $usersFounded = User::where('firstname', 'LIKE',  '%' . $request->search . '%')->orWhere('lastname', 'LIKE', '%' . $request->search . '%')->get();
+
+            return view('results', compact('usersFounded', 'users'));
+        }
+
         $users = User::paginate(5);
 
         $user = Auth::user();

@@ -10995,3 +10995,16 @@ textarea {
   left: 100px;
 }
 
+.inputSearch {
+  border: none;
+  background: none;
+  border-bottom: 1px #eeeeee solid;
+}
+
+.inputSearch:focus {
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px #eeeeee solid;
+}
+

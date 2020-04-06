@@ -24,7 +24,7 @@
         <main class="py-4">
             <div class="d-flex flex-wrap">
 
-                <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top mt-4">
+                <div class="col-3 d-flex flex-column align-items-end pr-5 sticky-top pt-4">
                     <div class=" d-flex" href="{{ url('/home') }}">
                         <img src="{{asset('images/p2p-logo.png')}}" class="icon" alt="" srcset=""><h2 class="m-0">Peer2Pear</h2> 
                     </div>
@@ -47,8 +47,13 @@
                         @yield('content')
                 </div>
 
-                <div class="col-3 sticky-top mt-4">
-                    <h3 class="text-secondary  mb-4">Vous connaissez peut-être...</h3>
+                <div class="col-3 sticky-top pt-4">
+                    <form id="search" action="/home" method="GET" class="d-flex">
+                        @csrf
+                        <input class="col-8 inputSearch" type="text" name="search" placeholder="Rechercher un amis">
+                        <button type="submit" class="btn btn-rounded btn-main-color col-4">Rechercher</button>
+                    </form>
+                    <h3 class="text-secondary  my-4">Vous connaissez peut-être...</h3>
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
                     @php 
