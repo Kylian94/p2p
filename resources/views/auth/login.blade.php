@@ -12,7 +12,6 @@
             <div class="mt-3">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-
                     <div class="form-group row">
                         <label for="email" class="col-md-6 col-form-label text-md-left">{{ __('E-Mail Address') }}</label>
 

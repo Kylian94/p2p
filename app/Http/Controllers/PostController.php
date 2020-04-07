@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Like;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -93,6 +95,8 @@ class PostController extends Controller
     public function destroy(Request $request)
     {
         Post::where('id', $request->id)->delete();
+        Like::where('post_id', $request->id)->delete();
+        Comment::where('post_id', $request->id)->delete();
         return back();
     }
 }
