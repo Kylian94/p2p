@@ -19,6 +19,19 @@
         </form>
         <hr>
         <h3>Votre actualité</h3>
+        @if(count($posts) == 0) 
+        <div class="p-4 rounded bg-white text-center mt-5">
+            <h2>Bienvenue sur Peer2pear</h2>
+            <p class="text-center mt-3"> 
+                Ici c'est votre actualité, vous y retrouverez tous vos posts ainsi que ceux de vos amis, triés par date.<br>
+                Du plus récent au plus vieux <br>
+                <br>
+                Alimentez votre fil d'actualité dès maitenant ! <br>
+                <br>
+                 Rédigez un post, rechercher des amis, ajoutez-les !</p>
+        </div>
+        
+        @endif
 
         @foreach ($posts as $post)
          
