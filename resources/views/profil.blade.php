@@ -14,8 +14,21 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="#" method="post">
+          <form action="/editProfil" method="post">
+            @csrf
             <div class="modal-body">
+               <div class="form-group row">
+                  <label for="profile-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de profil') }}</label>
+                  <div class="col-md-12">
+                     <input id="profile-image-upload" name="profile-image" type="file">
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="banner-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de bannière') }}</label>
+                  <div class="col-md-12">
+                     <input id="banner-image-upload" name="banner-image" type="file">
+                  </div>
+               </div>
                <div class="form-group row">
                   <label for="firstname" class="col-md-6 col-form-label text-md-left">{{ __('Prénom') }}</label>
 
@@ -56,12 +69,12 @@
                <div class="form-group row">
                   <label for="description" class="col-md-6 col-form-label text-md-left">{{ __('Description') }}</label>
                   <div class="col-md-12">
-                     <textarea rows="6" placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum aut. Consequuntur, voluptas eius tempore sit vel quibusdam enim, qui inventore doloremque ipsa, distinctio molestias blanditiis illo et voluptates ratione!" id="firstname" type="text" class="form-control @error('description') is-invalid @enderror" name="firstname" >
+                     <textarea rows="6" placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum aut. Consequuntur, voluptas eius tempore sit vel quibusdam enim, qui inventore doloremque ipsa, distinctio molestias blanditiis illo et voluptates ratione!" id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" >
                         {{Auth::user()->description}}
                         
                      </textarea>
 
-                      @error('firstname')
+                      @error('description')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                           </span>
@@ -71,7 +84,7 @@
             </div>
             
             <div class="modal-footer">
-              <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">Annuler</button>
               <button type="submit" class="btn btn-rounded btn-main-color ">Enregistrer</button>
             </div>
           </form>
@@ -79,8 +92,9 @@
         </div>
       </div>
     </div>
-   <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
-   <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
+    
+   <img id="banner-image" class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
+   <img id="profile-image" class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
    
    <div class="d-flex pt-4 mt-5">
          <h2 class="mr-1">{{$user->firstname}}</h2>

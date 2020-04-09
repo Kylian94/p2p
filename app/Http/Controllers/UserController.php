@@ -42,4 +42,17 @@ class UserController extends Controller
         $nbFriends = count($user->friendOfAccepted) + count($user->friendsAccepted);
         return view('user', compact('user', 'users', 'posts', 'comments', 'likes', 'nbFriends'));
     }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->description = $request->description;
+        $user->save();
+
+        return back();
+    }
 }
