@@ -2,7 +2,83 @@
 
 @section('content')
 <div class="px-5 ">
-   <a class=" float-right mb-3 btn btn-main-color btn-rounded" href="/editProfil">Modifier mon profil</a>
+   <button type="button" class="float-right mb-3 btn btn-main-color btn-rounded" data-toggle="modal" data-target="#exampleModalCenter">
+      Modifier le profil
+    </button>
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modifier votre profil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="#" method="post">
+            <div class="modal-body">
+               <div class="form-group row">
+                  <label for="firstname" class="col-md-6 col-form-label text-md-left">{{ __('Prénom') }}</label>
+
+                  <div class="col-md-12">
+                     <input value="{{Auth::user()->firstname}}" id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" required >
+
+                      @error('firstname')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="lastname" class="col-md-6 col-form-label text-md-left">{{ __('Nom') }}</label>
+                  <div class="col-md-12">
+                     <input value="{{Auth::user()->lastname}}" id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" required >
+
+                      @error('lastname')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="email" class="col-md-6 col-form-label text-md-left">{{ __('Email') }}</label>
+                  <div class="col-md-12">
+                     <input value="{{Auth::user()->email}}" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required >
+
+                      @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label for="description" class="col-md-6 col-form-label text-md-left">{{ __('Description') }}</label>
+                  <div class="col-md-12">
+                     <textarea rows="6" placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum aut. Consequuntur, voluptas eius tempore sit vel quibusdam enim, qui inventore doloremque ipsa, distinctio molestias blanditiis illo et voluptates ratione!" id="firstname" type="text" class="form-control @error('description') is-invalid @enderror" name="firstname" >
+                        {{Auth::user()->description}}
+                        
+                     </textarea>
+
+                      @error('firstname')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+               </div>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-rounded btn-main-color ">Enregistrer</button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
    <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
    <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
    
@@ -18,7 +94,12 @@
       <p>{{count($likes)}} J'aime</p>
    </div>
    <h4>Ma description :</h4>
-   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laborum cupiditate voluptates laboriosam natus, doloribus vitae itaque excepturi. Dolorem, velit nostrum incidunt nam veritatis expedita dolorum qui corrupti id molestias.</p>
+   @if($user->description)
+   <p>{{$user->description}}</p>
+   @else
+   <div class="alert alert-info">Vous n'avez pas encore de description perso, vous pouvez en ajouter une en modifiant votre profil !</div>
+   @endif
+   
    <hr>
    <h4>Mes posts :</h4>
    @if(count($posts) == 0)
