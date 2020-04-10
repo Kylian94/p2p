@@ -197,7 +197,6 @@
       <hr class="w-100">
       <!-- NAV LIKE COMMENT-->
       
-      
       <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                <!-- CHANGE A IN FORM TO LIKE -->
@@ -261,10 +260,8 @@
                   <div class="content  mt-3">
                         <p>{{$comment->content}}</p>
                   </div>
-               </div>
-                  
+               </div>   
                @endforeach
-               
                <!-- END COMMENTS -->
             </div>
       </div>
