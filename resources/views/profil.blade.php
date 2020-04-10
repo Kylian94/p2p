@@ -6,7 +6,7 @@
       Modifier le profil
     </button>
    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Modifier votre profil</h5>
@@ -16,20 +16,21 @@
           </div>
           <form action="/editProfil" method="post">
             @csrf
-            <div class="modal-body">
-               <div class="form-group row">
-                  <label for="profile-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de profil') }}</label>
-                  <div class="col-md-12">
-                     <input id="profile-image-upload" name="profile-image" type="file">
-                  </div>
-               </div>
-               <div class="form-group row">
+            <div class="modal-body d-flex flex-wrap">
+               <div class="form-group col-12 row">
                   <label for="banner-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de bannière') }}</label>
                   <div class="col-md-12">
                      <input id="banner-image-upload" name="banner-image" type="file">
                   </div>
                </div>
-               <div class="form-group row">
+               <div class="form-group col-12 row">
+                  <label for="profile-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de profil') }}</label>
+                  <div class="col-md-12">
+                     <input id="profile-image-upload" name="profile-image" type="file">
+                  </div>
+               </div>
+               
+               <div class="form-group col-6 row">
                   <label for="firstname" class="col-md-6 col-form-label text-md-left">{{ __('Prénom') }}</label>
 
                   <div class="col-md-12">
@@ -42,7 +43,7 @@
                       @enderror
                   </div>
                </div>
-               <div class="form-group row">
+               <div class="form-group col-6 row">
                   <label for="lastname" class="col-md-6 col-form-label text-md-left">{{ __('Nom') }}</label>
                   <div class="col-md-12">
                      <input value="{{Auth::user()->lastname}}" id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" required >
@@ -54,7 +55,7 @@
                       @enderror
                   </div>
                </div>
-               <div class="form-group row">
+               <div class="form-group col-12 row">
                   <label for="email" class="col-md-6 col-form-label text-md-left">{{ __('Email') }}</label>
                   <div class="col-md-12">
                      <input value="{{Auth::user()->email}}" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required >
@@ -66,7 +67,7 @@
                       @enderror
                   </div>
                </div>
-               <div class="form-group row">
+               <div class="form-group col-12 row">
                   <label for="description" class="col-md-6 col-form-label text-md-left">{{ __('Description') }}</label>
                   <div class="col-md-12">
                      <textarea rows="6" placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum aut. Consequuntur, voluptas eius tempore sit vel quibusdam enim, qui inventore doloremque ipsa, distinctio molestias blanditiis illo et voluptates ratione!" id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" >

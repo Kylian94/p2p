@@ -73,13 +73,13 @@
                     <form  action="/deleteLike" method="post">
                         @csrf
                         <input type="hidden" value={{$post->id}} name="post_id">
-                        <button type="submit " class="btn btn-main-color btn-rounded">J'aime plus</button>
+                        <button type="submit " class="btn btn-none text-primary btn-rounded">J'aime plus</button>
                     </form>
                     @else 
                     <form  action="/createLike" method="post">
                         @csrf
                         <input type="hidden" value={{$post->id}} name="post_id">
-                        <button type="submit " class="btn btn-main-color btn-rounded">J'aime</button>
+                        <button type="submit " class="btn btn-none text-primary btn-rounded">J'aime</button>
                     </form>
                     @endif 
                 </div>
