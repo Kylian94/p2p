@@ -72,7 +72,11 @@
                     @if($user->id != Auth::user()->id)
                     <div class="d-flex align-items-center justify-content-between">
                         <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
+                            @if( $user->imageProfile != null)
+                            <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $user->imageProfile ) }}" alt="" srcset="">
+                            @else 
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                            @endif                            
                             <h5 class="mr-1 my-0 text-dark">{{$user->firstname}}</h5>
                             <h5 class="my-0 text-dark">{{$user->lastname}}</h5>
                         </a>

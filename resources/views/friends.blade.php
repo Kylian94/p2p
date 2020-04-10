@@ -17,8 +17,11 @@
             @foreach($user->friendsAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
-                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        @if( $friend->imageProfile != null)
+                        <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $friend->imageProfile ) }}" alt="" srcset="">
+                        @else 
+                        <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                        @endif                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
                         <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     <form action="/deleteFriend" method="post">
@@ -31,8 +34,11 @@
             @foreach($user->friendOfAccepted as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
-                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        @if( $friend->imageProfile != null)
+                        <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $friend->imageProfile ) }}" alt="" srcset="">
+                        @else 
+                        <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                        @endif                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
                         <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     <form action="/deleteFriend" method="post">
@@ -55,8 +61,11 @@
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
-                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
-                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
+                        @if( $friend->imageProfile != null)
+                        <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $friend->imageProfile ) }}" alt="" srcset="">
+                        @else 
+                        <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                        @endif                        <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
                         <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>
                     
@@ -78,7 +87,11 @@
             @foreach($user->friendsOfMine as $friend)
                 <div class="col-12 d-flex justify-content-between align-items-center p-3 bg-white rounded mt-2">
                     <a href="/user/{{$friend->id}}" class="d-flex align-items-center">
-                        <img src="{{asset('images/avatar.jpeg')}}" class="icon" alt="" srcset="">
+                        @if( $friend->imageProfile != null)
+                        <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $friend->imageProfile ) }}" alt="" srcset="">
+                        @else 
+                        <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                        @endif
                         <h5 class="ml-3 my-0 ">{{$friend->firstname}}</h5>
                         <h5 class="ml-1 my-0 ">{{$friend->lastname}}</h5>
                     </a>

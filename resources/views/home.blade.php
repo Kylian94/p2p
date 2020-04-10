@@ -4,7 +4,11 @@
     <div class="px-5">
         <div class="d-flex align-items-center mt-3">
             <a href="{{ route('profil') }}">
+                @if( Auth::user()->imageProfile != null)
+                <img class="main-avatar mr-3" src="{{ asset('images/userProfileImages/' . Auth::user()->imageProfile ) }}" alt="" srcset="">
+                @else 
                 <img src="{{asset('images/avatar.jpeg')}}" class="main-avatar mr-3" alt="" srcset="">
+                @endif
             </a>
             <h1 class="">Hello {{Auth::user()->firstname}},<br>
                 Quoi de beau aujourd'hui ?
@@ -45,7 +49,13 @@
                 
                 @endphp
                 <a @if($post->user->id == Auth::user()->id) href="/profil" @else href="/user/{{$post->user->id}}" @endif class="d-flex align-items-center mt-4">
+                    @if( $post->user->imageProfile != null)
+                    <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $post->user->imageProfile ) }}" alt="" srcset="">
+                    @else 
                     <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                    @endif
+                    
+                    
                     <div class="d-flex flex-column">
                         <div class="d-flex">
                                 <h6 class="font-weight-bold m-0">{{$post->user->firstname}}</h6>
@@ -136,7 +146,11 @@
                     @foreach ($comments as $comment)
                     <div class="d-flex flex-column ml-5  bg-light py-3 px-5 mb-2">
                         <div class="d-flex align-items-center mt-3 ">
+                            @if( $comment->user->imageProfile != null)
+                            <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $comment->user->imageProfile ) }}" alt="" srcset="">
+                            @else 
                             <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                            @endif
                             <div class="d-flex flex-column">
                                 <a href="/user/{{$comment->user->id}}" class="d-flex">
                                         <h6 class="font-weight-bold m-0 ">{{$comment->user->firstname}}</h6>

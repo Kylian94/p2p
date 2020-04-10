@@ -10,8 +10,11 @@
     <div class="bg-white mb-4 p-3">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                <div class="d-flex flex-column">
+                    @if( $comment->user->imageProfile != null)
+                    <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $comment->user->imageProfile ) }}" alt="" srcset="">
+                    @else 
+                    <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                    @endif                <div class="d-flex flex-column">
                     <div class="d-flex">
                             <h6 class="font-weight-bold m-0">{{$comment->user->firstname}}</h6>
                             <h6 class="font-weight-bold my-0 ml-2">{{$comment->user->lastname}}</h6>

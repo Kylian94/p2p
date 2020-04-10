@@ -2,8 +2,19 @@
 
 @section('content')
 <div class="px-5 mt-5">
-    <img class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
-    <img class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
+
+    @if( $user->bannerImage != null)
+    <img id="banner-image" class="position-relative img-banner" src="{{ asset('images/userBannerImages/' . $user->bannerImage ) }}" alt="" srcset="">
+    @else 
+    <img id="banner-image" class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
+    @endif
+    
+    @if( $user->imageProfile != null)
+    <img id="profile-image" class="position-absolute img-profil img-thumbnail" src="{{ asset('images/userProfileImages/' . $user->imageProfile ) }}" alt="" srcset="">
+    @else 
+    <img id="profile-image" class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
+    @endif
+
     <div class="d-flex pt-4 mt-5">
             <h2 class="mr-1">{{$user->firstname}}</h2>
             <h2>{{$user->lastname}}</h2>
