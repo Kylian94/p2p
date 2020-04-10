@@ -47,6 +47,34 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
+        $request->validate([
+            'imageProfile' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'bannerImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+
+        if ($request->bannerImage) {
+
+            if (Auth::user()->bannerImage) {
+                unlink(public_path('images/userBannerImages/' . Auth::user()->bannerImage));
+            }
+
+            $bannerImageName = time() . '.' . $request->bannerImage->extension();
+            $request->bannerImage->move(public_path('images/userBannerImages'), $bannerImageName);
+            $user->bannerImage = $bannerImageName;
+        }
+
+        if ($request->imageProfile) {
+
+            if (Auth::user()->imageProfile) {
+                unlink(public_path('images/userProfileImages/' . Auth::user()->imageProfile));
+            }
+
+            $imageProfileName = time() + 1 . '.' . $request->imageProfile->extension();
+            $request->imageProfile->move(public_path('images/userProfileImages'), $imageProfileName);
+            $user->imageProfile = $imageProfileName;
+        }
+
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;

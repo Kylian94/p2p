@@ -14,19 +14,19 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="/editProfil" method="post">
+          <form action="/editProfil" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-body d-flex flex-wrap">
                <div class="form-group col-12 row">
                   <label for="banner-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de bannière') }}</label>
                   <div class="col-md-12">
-                     <input id="banner-image-upload" name="banner-image" type="file">
+                     <input id="banner-image-upload" name="bannerImage" type="file" value="{{Auth::user()->bannerImage}}">
                   </div>
                </div>
                <div class="form-group col-12 row">
                   <label for="profile-image-upload" class="col-md-6 col-form-label text-md-left">{{ __('Image de profil') }}</label>
                   <div class="col-md-12">
-                     <input id="profile-image-upload" name="profile-image" type="file">
+                     <input id="profile-image-upload" name="imageProfile" type="file" value="{{Auth::user()->imageProfile}}">
                   </div>
                </div>
                
@@ -93,9 +93,18 @@
         </div>
       </div>
     </div>
+    @if( Auth::user()->bannerImage != null)
+    <img id="banner-image" class="position-relative img-banner" src="{{ asset('images/userBannerImages/' . Auth::user()->bannerImage ) }}" alt="" srcset="">
+    @else 
+    <img id="banner-image" class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
+    @endif
     
-   <img id="banner-image" class="position-relative img-banner" src="{{asset('images/banner-default.png')}}" alt="" srcset="">
+   @if( Auth::user()->imageProfile != null)
+   <img id="profile-image" class="position-absolute img-profil img-thumbnail" src="{{ asset('images/userProfileImages/' . Auth::user()->imageProfile ) }}" alt="" srcset="">
+   @else 
    <img id="profile-image" class="position-absolute img-profil img-thumbnail" src="{{asset('images/avatar.jpeg')}}" alt="" srcset="">
+   @endif
+
    
    <div class="d-flex pt-4 mt-5">
          <h2 class="mr-1">{{$user->firstname}}</h2>
