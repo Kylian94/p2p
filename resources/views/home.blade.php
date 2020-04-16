@@ -14,9 +14,10 @@
                 Quoi de beau aujourd'hui ?
             </h1>
         </div>
-        <form action="/createPost" method="post" class="mt-3">
+        <form action="/createPost" method="post" class="mt-3" enctype="multipart/form-data">
             @csrf
             <textarea name="content" id="post" placeholder="Partagez vos idées ici..." class="col-12 p-3"></textarea>
+            <input type="file" name="image" id="image">
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-rounded px-4 py-2 btn-main-color">Publier</button>
             </div>
@@ -65,6 +66,11 @@
                         <p class="m-0 text-dark">{{$post->created_at->diffForHumans()}}</p>
                     </div>
                 </a>
+                @if($post->image)
+                <div class="image  mt-3">
+                    <img class="post-image" src="{{asset('images/postImages/' . $post->image)}}"/>
+                </div>
+                @endif
                 <div class="content  mt-3">
                     <p>{{$post->content}}</p>
                 </div>

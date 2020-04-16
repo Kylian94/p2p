@@ -11008,3 +11008,10 @@ textarea {
   border-bottom: 1px #eeeeee solid;
 }
 
+.post-image {
+  height: 300px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+

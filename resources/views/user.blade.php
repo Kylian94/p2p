@@ -97,6 +97,11 @@
                      <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
                  </div>
              </div>
+             @if($post->image)
+                <div class="image  mt-3">
+                    <img class="post-image" src="{{asset('images/postImages/' . $post->image)}}"/>
+                </div>
+            @endif
              <div class="content  mt-3">
                  <p>{{$post->content}}</p>
              </div>

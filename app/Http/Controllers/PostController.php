@@ -42,6 +42,13 @@ class PostController extends Controller
         $post = new Post;
         $post->user_id = Auth::user()->id;
         $post->content = $request->content;
+
+        if ($request->image) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/postImages/'), $imageName);
+            $post->image = $imageName;
+        }
+
         $post->save();
 
         return back();
@@ -94,6 +101,14 @@ class PostController extends Controller
      */
     public function destroy(Request $request)
     {
+        $id = $request->id;
+        $post = Post::find($id);
+        $postImage = $post->image;
+        if (isset($postImage)) {
+            unlink(public_path('images/postImages/' . $postImage));
+        }
+
+
         Post::where('id', $request->id)->delete();
         Like::where('post_id', $request->id)->delete();
         Comment::where('post_id', $request->id)->delete();

@@ -164,6 +164,11 @@
                   <button type="submit" class="btn btn-secondary btn-rounded" onclick="return confirm('Cette action est irréversible.. Souhaitez vous vraiment supprimer votre post ?')">X</button>
               </form>
             </div>
+            @if($post->image)
+                <div class="image  mt-3">
+                    <img class="post-image" src="{{asset('images/postImages/' . $post->image)}}"/>
+                </div>
+            @endif
             <div class="content  mt-3">
                <p>{{$post->content}}</p>
             </div>
