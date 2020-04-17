@@ -30,59 +30,15 @@
     </div>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laborum cupiditate voluptates laboriosam natus, doloribus vitae itaque excepturi. Dolorem, velit nostrum incidunt nam veritatis expedita dolorum qui corrupti id molestias.</p>
     <hr>
-   @php
-      $userFriend = App\Friend::where('friend_id', $user->id)
-      ->where('user_id', Auth::user()->id)
-      ->where('isAccepted', 1)
-      ->get();
-      $userFriendOf = App\Friend::where('friend_id', Auth::user()->id )
-      ->where('user_id', $user->id)
-      ->where('isAccepted', 1)
-      ->get();
-      $userFriendPending = App\Friend::where('friend_id', $user->id)
-      ->where('user_id', Auth::user()->id)
-      ->where('isAccepted', 0)
-      ->get();
-      $userFriendOfPending = App\Friend::where('friend_id', Auth::user()->id )
-      ->where('user_id', $user->id)
-      ->where('isAccepted', 0)
-      ->get();
-      
-   @endphp
    
-   @if(count($userFriend) == 0 && count($userFriendOf) == 0)
-   
-   <div class="d-flex justify-content-between align-items-center">
-    <p class="mt-3">Vous n'êtes pas encore amis...</p>                                     
-    <form action="/createFriend" method="post" class="mt-3">
-        @csrf
-        
-        <input type="hidden" value={{$user->id}} name="friend_id">
-            @if(count($userFriendPending) OR count($userFriendOfPending))
-                
-                <button type="button" class="btn btn-secondary btn-rounded btn-add disabled px-4 py-2">
-                        En attente d'acceptation
-                </button>
-            @else 
-            
-            <button type="submit" class="btn btn-main-color btn-rounded btn-add px-4 py-2">
-                    Ajouter comme ami 
-                </button>
-            @endif  
-    </form>
-   </div>
-   @else 
+   @if(count($user->friendsOfMineAccepted()->get()) || count($user->friendOfAccepted()->get()))
+
    <p>You are friend</p>
+ 
    @foreach($posts as $post)
    <div class="d-flex flex-column bg-white p-3 rounded mb-4">
          <!-- POST -->
-             @php 
-             $like = App\Like::where([
-                 'user_id' => Auth::user()->id,
-                 'post_id' => $post->id
-                 ])->get();
              
-             @endphp
              <div class="d-flex align-items-center mt-4">
                     @if( $post->user->imageProfile != null)
                     <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $post->user->imageProfile ) }}" alt="" srcset="">
@@ -107,7 +63,7 @@
              </div>
              <div class="d-flex justify-content-between">
                  <div class="d-flex">
-                     @if(count($like))
+                     @if(count($post->likes()->get()))
                      <img src="{{asset('images/heart-fill.png')}}" class="icon" alt="" srcset="">
                      @else
                      <img src="{{asset('images/heart.png')}}" class="icon" alt="" srcset="">
@@ -134,13 +90,11 @@
          <!-- END POST -->
          <hr class="w-100">
          <!-- NAV LIKE COMMENT-->
-         
-         
          <nav>
              <div class="nav nav-tabs" id="nav-tab" role="tablist">
                  <!-- CHANGE A IN FORM TO LIKE -->
                  <div class=" col-6 d-flex justify-content-center">
-                     @if(count($like))
+                     @if(count($post->likes()->get()))
                      <form  action="/deleteLike" method="post">
                          @csrf
                          <input type="hidden" value={{$post->id}} name="post_id">
@@ -176,11 +130,9 @@
                  </form>
                  <hr class="w-100">
                  <!-- ALL COMMENTS -->
-                 @php
-                 $comments = App\Post::find($post->id)->comments
-                 @endphp
                  
-                 @foreach ($comments as $comment)
+                 
+                 @foreach ($post->comments()->get() as $comment)
                  <div class="d-flex flex-column ml-5  bg-light py-3 px-5 mb-2">
                      <div class="d-flex align-items-center mt-3 ">
                             @if( $comment->user->imageProfile != null)
@@ -201,13 +153,34 @@
                  </div>
                      
                  @endforeach
-                 
                  <!-- END COMMENTS -->
              </div>
          </div>
      </div>
 
    @endforeach
+   
+   @else 
+   <div class="d-flex justify-content-between align-items-center">
+        <p class="mt-3">Vous n'êtes pas encore amis...</p>                                     
+        <form action="/createFriend" method="post" class="mt-3">
+            @csrf
+            
+            <input type="hidden" value={{$user->id}} name="friend_id">
+            
+                @if(count($user->friendsOfMine()->get()) || count($user->friendOf()->get()))
+                    
+                    <button type="button" class="btn btn-secondary btn-rounded btn-add disabled px-4 py-2">
+                            En attente d'acceptation
+                    </button>
+                @else 
+                
+                <button type="submit" class="btn btn-main-color btn-rounded btn-add px-4 py-2">
+                        Ajouter comme ami 
+                    </button>
+                @endif  
+        </form>
+       </div>
    @endif
 </div>
 @endsection

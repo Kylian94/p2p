@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Friend;
 use App\Like;
 use App\Post;
 use App\User;
@@ -40,6 +41,7 @@ class UserController extends Controller
         $comments = Comment::where('user_id', $user->id)->get();
         $likes = Like::where('user_id', $user->id)->get();
         $nbFriends = count($user->friendOfAccepted) + count($user->friendsAccepted);
+
         return view('user', compact('user', 'users', 'posts', 'comments', 'likes', 'nbFriends'));
     }
 

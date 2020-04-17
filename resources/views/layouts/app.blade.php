@@ -56,53 +56,40 @@
                     <h3 class="text-secondary  my-4">Vous connaissez peut-être...</h3>
                     @foreach($users as $user)
                     <!-- SUGGEST USER -->
-                    @php 
-                        $userAccepted = App\Friend::where('friend_id', $user->id)
-                                            ->where('user_id', Auth::user()->id)
-                                            ->where('isAccepted', 1)
-                                            ->get();
+                    
+                    @if(count($user->friendsOfMineAccepted()->get()) || count($user->friendOfAccepted()->get()))
 
-                        $friendAccepted = App\Friend::where('friend_id', Auth::user()->id)
-                                            ->where('user_id', $user->id)
-                                            ->where('isAccepted', 1)
-                                            ->get();
-                    @endphp
-                    @if(count($userAccepted) || count($friendAccepted))
                     @else
-                    @if($user->id != Auth::user()->id)
-                    <div class="d-flex align-items-center justify-content-between">
-                        <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
-                            @if( $user->imageProfile != null)
-                            <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $user->imageProfile ) }}" alt="" srcset="">
-                            @else 
-                            <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
-                            @endif                            
-                            <h5 class="mr-1 my-0 text-dark">{{$user->firstname}}</h5>
-                            <h5 class="my-0 text-dark">{{$user->lastname}}</h5>
-                        </a>
-                        
-                        @php
-                            $userFriends = App\Friend::where('friend_id', $user->id)->where('user_id', Auth::user()->id)->get();
-                        @endphp
-                            
-                       
-                        <form action="/createFriend" method="post" class="mt-3">
-                            @csrf
-                            <input type="hidden" value={{$user->id}} name="friend_id">
-                                 @if(count($userFriends))
-                                 <button type="button" class="btn btn-secondary btn-rounded btn-add disabled ">
-                                        <img src="{{asset('images/wait.png')}}" alt="" srcset="" class="icon-little"> 
-                                    </button>
+
+                        @if($user->id != Auth::user()->id)
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a href="/user/{{$user->id}}" class="d-flex align-items-center col-4">
+                                @if( $user->imageProfile != null)
+                                <img class="avatar mr-3" src="{{ asset('images/userProfileImages/' . $user->imageProfile ) }}" alt="" srcset="">
                                 @else 
-                                <button type="submit" class="btn btn-main-color btn-rounded btn-add ">
-                                        <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
-                                    </button>
-                                @endif  
-                        </form>
-                        
-                    </div>
-                    <hr class="w-100">
-                    @endif
+                                <img src="{{asset('images/avatar.jpeg')}}" class="avatar mr-3" alt="" srcset="">
+                                @endif                            
+                                <h5 class="mr-1 my-0 text-dark">{{$user->firstname}}</h5>
+                                <h5 class="my-0 text-dark">{{$user->lastname}}</h5>
+                            </a>
+                            
+                            <form action="/createFriend" method="post" class="mt-3">
+                                @csrf
+                                <input type="hidden" value={{$user->id}} name="friend_id">
+                                    @if(count($user->friendsOfMine()->get()) || count($user->friendOf()->get()))
+                                    <button type="button" class="btn btn-secondary btn-rounded btn-add disabled ">
+                                            <img src="{{asset('images/wait.png')}}" alt="" srcset="" class="icon-little"> 
+                                        </button>
+                                    @else 
+                                    <button type="submit" class="btn btn-main-color btn-rounded btn-add ">
+                                            <img src="{{asset('images/add-user.png')}}" alt="" srcset="" class="icon-little"> 
+                                        </button>
+                                    @endif  
+                            </form>
+                            
+                        </div>
+                        <hr class="w-100">
+                        @endif
                     @endif
                     @endforeach
                     <!-- END SUGGEST USER-->

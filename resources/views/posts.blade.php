@@ -7,13 +7,7 @@
     @if(count($posts) != 0)
     
     @foreach ($posts as $post)
-    @php 
-    $like = App\Like::where([
-        'user_id' => Auth::user()->id,
-        'post_id' => $post->id
-        ])->get();
-    
-    @endphp
+
     <div class="bg-white mb-4 p-3">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
@@ -49,7 +43,7 @@
         </div>
         <div class="d-flex justify-content-between">
             <div class="d-flex">
-                @if(count($like))
+                @if(count($post->likes()->get()))
                 <img src="{{asset('images/heart-fill.png')}}" class="icon" alt="" srcset="">
                 @else
                 <img src="{{asset('images/heart.png')}}" class="icon" alt="" srcset="">
@@ -79,7 +73,7 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <!-- CHANGE A IN FORM TO LIKE -->
                 <div class=" col-6 d-flex justify-content-center">
-                    @if(count($like))
+                    @if(count($post->likes()->get()))
                     <form  action="/deleteLike" method="post">
                         @csrf
                         <input type="hidden" value={{$post->id}} name="post_id">
@@ -114,11 +108,8 @@
                 </form>
                 <hr class="w-100">
                 <!-- ALL COMMENTS -->
-                @php
-                $comments = App\Post::find($post->id)->comments
-                @endphp
-                
-                @foreach ($comments as $comment)
+            
+                @foreach ($post->comments()->get() as $comment)
                 <div class="d-flex flex-column px-5 ml-3">
                         <div class="d-flex align-items-center mt-3">
                             @if( $comment->user->imageProfile != null)

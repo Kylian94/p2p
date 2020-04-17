@@ -65,6 +65,8 @@ class HomeController extends Controller
         $keys = array_column($posts, 'created_at');
         array_multisort($keys, SORT_DESC, $posts);
 
+
+
         return view('home', compact('users', 'posts', 'user'));
     }
 }
