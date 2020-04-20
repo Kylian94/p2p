@@ -67,6 +67,7 @@ class HomeController extends Controller
 
 
 
+
         return view('home', compact('users', 'posts', 'user'));
     }
 }

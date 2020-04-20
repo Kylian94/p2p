@@ -23,7 +23,6 @@ Route::get('/about', function () {
 
 
 
-Route::get('/user/{id}', 'UserController@user')->name('userProfil');
 
 Auth::routes();
 
@@ -32,6 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profil', 'UserController@profil')->name('profil');
 Route::post('/editProfil', 'UserController@update')->name('editProfil');
 
+
+Route::get('/user/{id}', 'UserController@user')->name('userProfil');
 
 Route::get('/posts', 'PostController@show')->name('posts');
 

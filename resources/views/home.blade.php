@@ -70,11 +70,12 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
-                        @if(count($post->likes()->get()))
+                        @if(count($post->likes()->where('user_id', '=', Auth::user()->id)->get()))
                         <img src="{{asset('images/heart-fill.png')}}" class="icon" alt="" srcset="">
                         @else
                         <img src="{{asset('images/heart.png')}}" class="icon" alt="" srcset="">
                         @endif
+                        
                         @if(count($post->likes()->get()) <= 1 )
                         <p class="my-0 ml-2">{{count($post->likes()->get())}} like</p>
                         @else 
@@ -98,12 +99,12 @@
             <hr class="w-100">
             <!-- NAV LIKE COMMENT-->
             
-            
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <!-- CHANGE A IN FORM TO LIKE -->
                     <div class=" col-6 d-flex justify-content-center">
-                        @if(count($post->likes()->get()))
+                        @if(count($post->likes()->where('user_id', '=', Auth::user()->id)->get()))
+                            
                         <form  action="/deleteLike" method="post">
                             @csrf
                             <input type="hidden" value={{$post->id}} name="post_id">
